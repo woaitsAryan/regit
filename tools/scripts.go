@@ -6,9 +6,10 @@ import (
 	"strings"
 )
 
-
-func Owngit(path string) {
-	fmt.Println("owning git..")
+func Owngit(path string, flags map[string]bool ) {
+	if(!flags["quiet"]){
+		fmt.Println("Owning Git..")
+	}
 
 	nameCmd := exec.Command("git", "config", "user.name")
     nameOut, err := nameCmd.Output()
@@ -25,6 +26,9 @@ func Owngit(path string) {
         return
     }
 	email := strings.TrimSpace(string(emailOut))
+	if(flags["verbose"]){
+		fmt.Printf("Local credentials found! %s <%s>", name, email)
+	}
 	ownCmd := []string{
 		"--email-callback",
 		fmt.Sprintf("return b\"%s\"", email),
@@ -32,11 +36,13 @@ func Owngit(path string) {
 		fmt.Sprintf("return b\"%s\"", name),
 		"--force",
 	}	
-	ExecuteRewrite(path, ownCmd)
+	ExecuteRewrite(path, ownCmd, flags)
 }
 
-func Blamegit(path string, name string, email string){
-	fmt.Println("blaming git..")
+func Blamegit(path string, name string, email string, flags map[string]bool ){
+	if(!flags["quiet"]){
+		fmt.Printf("Blaming Git to %s <%s>..", name, email)
+	}
 	blameCmd := []string{
 		"--email-callback",
 		fmt.Sprintf("return b\"%s\"", email),
@@ -44,5 +50,5 @@ func Blamegit(path string, name string, email string){
 		fmt.Sprintf("return b\"%s\"", name),
 		"--force",
 	}		
-	ExecuteRewrite(path, blameCmd)
+	ExecuteRewrite(path, blameCmd, flags)
 }

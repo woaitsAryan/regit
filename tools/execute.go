@@ -6,7 +6,7 @@ import (
 	"os/exec"
 )
 
-func ExecuteRewrite(source string, command []string) {
+func ExecuteRewrite(source string, command []string, flags map[string]bool) {
 	bashScriptPath := "./git-filter-repo"
 
     args := append([]string{"--source", source, "--target", source}, command...)
@@ -16,6 +16,11 @@ func ExecuteRewrite(source string, command []string) {
 	if err != nil {
 		log.Fatalf("cmd.Run() failed with %s\n", err)
 	}
-
-	fmt.Println(string(output))
+	if(flags["quiet"]){
+		return
+	}
+	if(flags["verbose"]){
+		fmt.Println(string(output))
+	}
+	fmt.Println("Done!")
 }
