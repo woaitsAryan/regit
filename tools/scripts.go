@@ -27,7 +27,7 @@ func Owngit(path string, flags map[string]bool ) {
     }
 	email := strings.TrimSpace(string(emailOut))
 	if(flags["verbose"]){
-		fmt.Printf("Local credentials found! %s <%s>", name, email)
+		fmt.Printf("Local credentials found! %s <%s>\n", name, email)
 	}
 	ownCmd := []string{
 		"--email-callback",
@@ -41,7 +41,7 @@ func Owngit(path string, flags map[string]bool ) {
 
 func Blamegit(path string, name string, email string, flags map[string]bool ){
 	if(!flags["quiet"]){
-		fmt.Printf("Blaming Git to %s <%s>..", name, email)
+		fmt.Printf("Blaming Git to %s <%s>..\n", name, email)
 	}
 	blameCmd := []string{
 		"--email-callback",

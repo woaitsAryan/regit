@@ -3,6 +3,9 @@
 
 Regit is a friendly CLI tool written in Golang that allows you to rewrite entire git histories. With Regit, you can make yourself or anyone else the author of all the commits in a repository.
 
+## Warning
+Using regit multiple times might cause object corruption in your git repository. Please use it after backup up your .git folder.
+
 ## Installation
 
 To run Regit, you can either use the provided executable or build your own. 

@@ -28,7 +28,7 @@ func init() {
 	OwnGitCommand.PersistentFlags().BoolVarP(&verbose, "verbose", "v", false, "verbose output")
 	OwnGitCommand.PersistentFlags().BoolVarP(&quiet, "quiet", "q", false, "quiet output")
 
-	var BlameGitCommand = &cobra.Command{
+	BlameGitCommand = &cobra.Command{
 		Use:   "blame [path] [name] [email]",
 		Short: "Blame the commits of a repository",
 		Args:  cobra.ExactArgs(3),
