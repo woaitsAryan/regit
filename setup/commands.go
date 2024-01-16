@@ -11,6 +11,7 @@ var quiet bool
 
 var OwnGitCommand *cobra.Command
 var BlameGitCommand *cobra.Command
+var BlameLinusCommand *cobra.Command
 
 func init() {
 	OwnGitCommand = &cobra.Command{
@@ -43,4 +44,18 @@ func init() {
 	}
 	BlameGitCommand.PersistentFlags().BoolVarP(&verbose, "verbose", "v", false, "verbose output")
 	BlameGitCommand.PersistentFlags().BoolVarP(&quiet, "quiet", "q", false, "quiet output")
+
+	BlameLinusCommand = &cobra.Command{
+		Use:   "blame-linus [path]",
+		Short: "Give all your commits to Linus :)",
+		Args:  cobra.ExactArgs(1),
+		Run: func(cmd *cobra.Command, args []string) {
+			path := args[0]
+			flags["verbose"] = verbose
+			flags["quiet"] = quiet
+			tools.Blamegit(path, "torvalds", "torvalds@linux-foundation.org", flags)
+		},
+	}
+	BlameLinusCommand.PersistentFlags().BoolVarP(&verbose, "verbose", "v", false, "verbose output")
+	BlameLinusCommand.PersistentFlags().BoolVarP(&quiet, "quiet", "q", false, "quiet output")
 }
