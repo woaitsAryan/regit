@@ -7,6 +7,6 @@ import (
 
 func main() {
 	var rootCmd = &cobra.Command{Use: "regit"}
-	rootCmd.AddCommand(setup.OwnGitCommand, setup.BlameGitCommand)
+	rootCmd.AddCommand(setup.OwnGitCommand, setup.BlameGitCommand, setup.BlameLinusCommand)
 	cobra.CheckErr(rootCmd.Execute())
 }
