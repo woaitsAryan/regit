@@ -37,5 +37,12 @@ Example:
 ./regit blame /home/user/my-git-repo "John Doe" "johndoe@example.com"
 ```
 
+3.`./regit blame-linus <path>`: Blame the legendary Linus Torvalds for all the commits in the repository at `<path>`.
+
+Example:
+```bash
+./regit blame-linus /home/user/my-git-repo"
+```
+
 ## Credits
 Regit uses [git-filter-repo](https://github.com/newren/git-filter-repo) under the hood to rewrite git histories. I would like to thank the authors and contributors of git-filter-repo for their work. 
