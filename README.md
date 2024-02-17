@@ -10,9 +10,11 @@ Using regit multiple times might cause object corruption in your git repository.
 
 To run Regit, you can either use the provided executable or build your own. 
 
-To use the provided executable, simply run:
+To use the provided executable, setup the executable and run it:
 
 ```bash
+make setup
+
 ./regit help
 ```
 
