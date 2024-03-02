@@ -11,6 +11,16 @@ import (
 func ExecuteRewrite(source string, command []string, flags map[string]bool) {
 	bashScriptPath := "./git-filter-repo"
 
+	testCmd := exec.Command(bashScriptPath, "--version")
+	_, err := testCmd.CombinedOutput()
+	if err != nil {
+		chmodCmd := exec.Command("chmod", "+x", bashScriptPath)
+		_, err := chmodCmd.CombinedOutput()
+		if err != nil {
+			log.Fatalf("chmodCmd.Run() failed with %s\n", err)
+		}
+	}
+
 	args := append([]string{"--source", source, "--target", source}, command...)
 
 	cmd := exec.Command(bashScriptPath, args...)
