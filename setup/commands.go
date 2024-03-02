@@ -8,10 +8,13 @@ import (
 var flags = make(map[string]bool)
 var verbose bool
 var quiet bool
+// var timezone string
 
 var OwnGitCommand *cobra.Command
 var BlameGitCommand *cobra.Command
 var BlameLinusCommand *cobra.Command
+var RetimeCommand *cobra.Command
+
 
 func init() {
 	OwnGitCommand = &cobra.Command{
@@ -58,4 +61,20 @@ func init() {
 	}
 	BlameLinusCommand.PersistentFlags().BoolVarP(&verbose, "verbose", "v", false, "verbose output")
 	BlameLinusCommand.PersistentFlags().BoolVarP(&quiet, "quiet", "q", false, "quiet output")
+
+	RetimeCommand = &cobra.Command{
+		Use:   "retime [path] [duration]",
+		Short: "Retime the commits of a repository to a given duration",
+		Args:  cobra.ExactArgs(2),
+		Run: func(cmd *cobra.Command, args []string) {
+			path := args[0]
+			duration := args[1]
+			flags["verbose"] = verbose
+			flags["quiet"] = quiet
+			tools.Retimegit(path, duration, flags)
+		},
+	}
+	RetimeCommand.PersistentFlags().BoolVarP(&verbose, "verbose", "v", false, "verbose output")
+	RetimeCommand.PersistentFlags().BoolVarP(&quiet, "quiet", "q", false, "quiet output")
+	// RetimeCommand.PersistentFlags().StringVarP(&timezone, "timezone", "t", "IST", "timezone to retime to")
 }

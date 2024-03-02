@@ -32,18 +32,24 @@ Example:
 ```bash
 ./regit own /home/user/my-git-repo
 ```
-2.`./regit blame <path> <name> <email>`: This command makes the user specified by `<name>` and `<email>` the author of all the commits in the repository at `<path>`.
+2. `./regit blame <path> <name> <email>`: This command makes the user specified by `<name>` and `<email>` the author of all the commits in the repository at `<path>`.
 
 Example:
 ```bash
 ./regit blame /home/user/my-git-repo "John Doe" "johndoe@example.com"
 ```
 
-3.`./regit blame-linus <path>`: Blame the legendary Linus Torvalds for all the commits in the repository at `<path>`.
+3. `./regit blame-linus <path>`: Blame the legendary Linus Torvalds for all the commits in the repository at `<path>`.
 
 Example:
 ```bash
 ./regit blame-linus /home/user/my-git-repo"
+```
+4. `./regit retime /home/user/my-git-repo `x`h`: This command rewrites the commit times of all the commits in the repository at `<path>` to be `x` hours in the past. Can be any number of hours.
+
+Example: 
+```bash
+./regit retime /home/user/my-git-repo 24h
 ```
 
 ## Credits
