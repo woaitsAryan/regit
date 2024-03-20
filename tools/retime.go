@@ -41,6 +41,7 @@ func Retimegit(path string, duration string, flags map[string]bool) {
 		curr_time[0] = str(int(curr_time[0]) + (%d * commit.id))
 		changed_time = " ".join(curr_time).encode()
 		commit.author_date = changed_time
+		commit.committer_date = changed_time
 		`, nowTime, intervalHop),
 		"--force",
 	}
