@@ -25,7 +25,7 @@ make build
 ```
 
 ## Usage
-Regit currently supports two commands:
+Regit currently supports three commands:
 1. `./regit own <path>`: This command makes you the author of all the commits in the repository at `<path>`. `<path>` should be the absolute path to the git repository, which can be obtained by running `pwd` in the root of the git repository.
 
 Example:
@@ -39,13 +39,7 @@ Example:
 ./regit blame /home/user/my-git-repo "John Doe" "johndoe@example.com"
 ```
 
-3. `./regit blame-linus <path>`: Blame the legendary Linus Torvalds for all the commits in the repository at `<path>`.
-
-Example:
-```bash
-./regit blame-linus /home/user/my-git-repo"
-```
-4. `./regit retime /home/user/my-git-repo `x`h`: This command rewrites the commit times of all the commits in the repository at `<path>` to be `x` hours in the past. Can be any number of hours.
+3. `./regit retime /home/user/my-git-repo `x`h`: This command rewrites the commit times of all the commits in the repository at `<path>` to be `x` hours in the past. Can be any number of hours.
 
 Example: 
 ```bash
