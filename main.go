@@ -18,6 +18,6 @@ func main() {
 	rootCmd.AddCommand(setup.BlameGitCommand)
 	rootCmd.AddCommand(setup.BlameLinusCommand)
 	rootCmd.AddCommand(setup.RetimeCommand)
-
+	rootCmd.AddCommand(setup.NukeGitCommand)
 	cobra.CheckErr(rootCmd.Execute())
 }
