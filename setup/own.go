@@ -2,19 +2,16 @@ package setup
 
 import (
 	"github.com/spf13/cobra"
-	"github.com/woaitsAryan/regit/tools"
+	"github.com/woaitsAryan/regit/scripts"
 )
 
 var flags = make(map[string]bool)
 var verbose bool
 var quiet bool
-// var timezone string
 
 var OwnGitCommand *cobra.Command
 var BlameGitCommand *cobra.Command
 var BlameLinusCommand *cobra.Command
-var RetimeCommand *cobra.Command
-
 
 func init() {
 	OwnGitCommand = &cobra.Command{
@@ -25,7 +22,7 @@ func init() {
 			path := args[0]
 			flags["verbose"] = verbose
 			flags["quiet"] = quiet
-			tools.Owngit(path, flags)
+			scripts.Owngit(path, flags)
 		},
 	}
 
@@ -42,7 +39,7 @@ func init() {
 			email := args[2]
 			flags["verbose"] = verbose
 			flags["quiet"] = quiet
-			tools.Blamegit(path, name, email, flags)
+			scripts.Blamegit(path, name, email, flags)
 		},
 	}
 	BlameGitCommand.PersistentFlags().BoolVarP(&verbose, "verbose", "v", false, "verbose output")
@@ -56,25 +53,9 @@ func init() {
 			path := args[0]
 			flags["verbose"] = verbose
 			flags["quiet"] = quiet
-			tools.Blamegit(path, "torvalds", "torvalds@linux-foundation.org", flags)
+			scripts.Blamegit(path, "torvalds", "torvalds@linux-foundation.org", flags)
 		},
 	}
 	BlameLinusCommand.PersistentFlags().BoolVarP(&verbose, "verbose", "v", false, "verbose output")
 	BlameLinusCommand.PersistentFlags().BoolVarP(&quiet, "quiet", "q", false, "quiet output")
-
-	RetimeCommand = &cobra.Command{
-		Use:   "retime [path] [duration]",
-		Short: "Retime the commits of a repository to a given duration",
-		Args:  cobra.ExactArgs(2),
-		Run: func(cmd *cobra.Command, args []string) {
-			path := args[0]
-			duration := args[1]
-			flags["verbose"] = verbose
-			flags["quiet"] = quiet
-			tools.Retimegit(path, duration, flags)
-		},
-	}
-	RetimeCommand.PersistentFlags().BoolVarP(&verbose, "verbose", "v", false, "verbose output")
-	RetimeCommand.PersistentFlags().BoolVarP(&quiet, "quiet", "q", false, "quiet output")
-	// RetimeCommand.PersistentFlags().StringVarP(&timezone, "timezone", "t", "IST", "timezone to retime to")
 }

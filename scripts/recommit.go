@@ -1,15 +1,11 @@
-package tools
+package scripts
 
 import (
 	"bytes"
 	"fmt"
 	"log"
 
-	// "log"
-	// "os"
-
 	"os/exec"
-	// "strconv"
 	"encoding/json"
 	"io"
 	"net/http"

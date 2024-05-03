@@ -1,4 +1,4 @@
-package tools
+package scripts
 
 import (
 	"fmt"
@@ -6,13 +6,15 @@ import (
 	"strconv"
 	"time"
 	"strings"
+
+	"github.com/woaitsAryan/regit/helpers"
 )
 
 func Retimegit(path string, duration string, flags map[string]bool) {
 
 	fmt.Printf("Dormammu, I've come to bargain.\n")
 
-	commitNum := getTotalCommits(path, flags)
+	commitNum := helpers.GetTotalCommits(path, flags)
 	durationOffset, err := time.ParseDuration("-" + duration)
 	if err != nil {
 		log.Fatal(err)
@@ -45,5 +47,5 @@ func Retimegit(path string, duration string, flags map[string]bool) {
 		`, nowTime, intervalHop),
 		"--force",
 	}
-	ExecuteRewrite(path, retimeCmd, flags)
+	helpers.ExecuteRewrite(path, retimeCmd, flags)
 }

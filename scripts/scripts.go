@@ -1,9 +1,11 @@
-package tools
+package scripts
 
 import (
 	"fmt"
 	"os/exec"
 	"strings"
+
+	"github.com/woaitsAryan/regit/helpers"
 )
 
 func Owngit(path string, flags map[string]bool ) {
@@ -36,7 +38,7 @@ func Owngit(path string, flags map[string]bool ) {
 		fmt.Sprintf("return b\"%s\"", name),
 		"--force",
 	}	
-	ExecuteRewrite(path, ownCmd, flags)
+	helpers.ExecuteRewrite(path, ownCmd, flags)
 }
 
 func Blamegit(path string, name string, email string, flags map[string]bool ){
@@ -50,5 +52,5 @@ func Blamegit(path string, name string, email string, flags map[string]bool ){
 		fmt.Sprintf("return b\"%s\"", name),
 		"--force",
 	}		
-	ExecuteRewrite(path, blameCmd, flags)
+	helpers.ExecuteRewrite(path, blameCmd, flags)
 }
