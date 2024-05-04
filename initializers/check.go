@@ -1,9 +1,10 @@
 package initializers
 
 import (
-    "fmt"
-    "os/exec"
-    "runtime"
+	"fmt"
+	"os"
+	"os/exec"
+	"runtime"
 )
 
 func CheckCommand() {
@@ -21,5 +22,6 @@ func CheckCommand() {
         default:
             fmt.Println("Please run the following command to install git filter-repo: \n\n  python3 -m pip install --user git-filter-repo")
         }
+        os.Exit(1)
     } 
 }
