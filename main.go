@@ -9,7 +9,6 @@ import (
 var rootCmd = &cobra.Command{Use: "regit"}
 
 func init(){
-	initializers.LoadEnv()
 	initializers.CheckCommand()
 }
 
@@ -19,5 +18,6 @@ func main() {
 	rootCmd.AddCommand(setup.BlameLinusCommand)
 	rootCmd.AddCommand(setup.RetimeCommand)
 	rootCmd.AddCommand(setup.NukeGitCommand)
+	rootCmd.AddCommand(setup.RecommitGitCommand)
 	cobra.CheckErr(rootCmd.Execute())
 }
