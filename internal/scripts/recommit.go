@@ -11,7 +11,7 @@ import (
 	"strings"
 	"sync"
 
-	// "github.com/charmbracelet/huh/spinner"
+	"github.com/charmbracelet/huh/spinner"
 
 	"github.com/woaitsAryan/regit/internal/helpers"
 	"github.com/woaitsAryan/regit/internal/initializers"
@@ -21,7 +21,6 @@ import (
 func Recommitgit(flags models.Flags) {
 	initializers.LoadEnv()
 	commitDetails := getCommitData(flags)
-
 
 	newCommitDetails := sendOpenAIMessage(commitDetails, flags)
 	arrLength := len(newCommitDetails)
@@ -59,8 +58,14 @@ func getCommitData(flags models.Flags) []string {
 }
 
 func sendOpenAIMessage(commitDetails []string, flags models.Flags) []string {
-
-	fmt.Println("Processing commit details, this might take some time...")
+	err := spinner.New().
+		Type(spinner.Line).
+		Title(fmt.Sprintf(" Processing %d commits, this might take some time...", len(commitDetails))).
+		Accessible(false).
+		Run()
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	var commitResponseDetails []string
 
@@ -68,7 +73,7 @@ func sendOpenAIMessage(commitDetails []string, flags models.Flags) []string {
 		Index   int
 		Content string
 	}
-	
+
 	var mutex = &sync.Mutex{}
 	var wg = &sync.WaitGroup{}
 
@@ -85,11 +90,10 @@ func sendOpenAIMessage(commitDetails []string, flags models.Flags) []string {
 		}
 	}()
 
-
-	for i, commit  := range commitDetails {
+	for i, commit := range commitDetails {
 		wg.Add(1)
 
-		go func(i int, commit string){
+		go func(i int, commit string) {
 			defer wg.Done()
 
 			data := openAIRequest(commit, i, flags)
@@ -99,10 +103,9 @@ func sendOpenAIMessage(commitDetails []string, flags models.Flags) []string {
 	}
 	wg.Wait()
 	close(jobs)
-
+	fmt.Println("All commits processed!")
 	return commitResponseDetails
 }
-
 
 func openAIRequest(commit string, i int, flags models.Flags) string {
 	var respBody models.Response
@@ -113,7 +116,7 @@ func openAIRequest(commit string, i int, flags models.Flags) string {
 			{
 				"role":    "system",
 				"content": "You are given commit message details and diffs. modify it what the commit message should be with proper formatting like using feat, fix or chore, you MUST always use these at the start. Output just the commit message and nothing else. If there's not enough information then just try to guess, never ask for more information.",
-			}, 
+			},
 			{
 				"role":    "user",
 				"content": string(commit),
@@ -148,7 +151,7 @@ func openAIRequest(commit string, i int, flags models.Flags) string {
 	}
 	content := respBody.Choices[0].Message.Content
 	if flags.Verbose {
-		fmt.Printf("Commit %d processed! Generated commit message is %s", i, content )
+		fmt.Printf("Commit %d processed! Generated commit message is %s", i, content)
 	}
 	return content
 }
