@@ -6,9 +6,12 @@ import (
 	"github.com/woaitsAryan/regit/setup"
 )
 
-var rootCmd = &cobra.Command{Use: "regit"}
+var rootCmd = &cobra.Command{
+	Use:   "regit",
+	Short: "Regit is a CLI for managing git repositories",
+}
 
-func init(){
+func init() {
 	initializers.CheckCommand()
 }
 
