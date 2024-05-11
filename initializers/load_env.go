@@ -3,6 +3,8 @@ package initializers
 import (
 	"fmt"
 	"log"
+	"os"
+	"path/filepath"
 	"reflect"
 
 	"github.com/spf13/viper"
@@ -15,11 +17,22 @@ type Config struct {
 var CONFIG Config
 
 func LoadEnv() {
-	viper.SetConfigFile(".env")
+	homeDir, err := os.UserHomeDir()
+    if err != nil {
+        log.Fatal(err)
+    }
 
-	err := viper.ReadInConfig()
+    configPath := filepath.Join(homeDir, ".config", "regit")
+
+	viper.SetConfigName(CONFIG_FILE_NAME) 
+	viper.SetConfigType("env") 
+	viper.AddConfigPath(configPath)
+
+	err = viper.ReadInConfig()
 	if err != nil {
-		log.Fatal(err)
+		fmt.Println("OpenAI key not found, recommit uses GPT 3.5 to rewrite commit messages.")
+		addOpenAIKey(configPath)
+		os.Exit(0)
 	}
 
 	err = viper.Unmarshal(&CONFIG)
@@ -30,8 +43,9 @@ func LoadEnv() {
 	missingKeys := checkMissingKeys(requiredKeys, CONFIG)
 
 	if len(missingKeys) > 0 {
-		err := fmt.Errorf("following environment variables not found: %v", missingKeys)
-		log.Fatal(err)
+		fmt.Println("OpenAI key not found, recommit uses GPT 3.5 to rewrite commit messages.")
+		addOpenAIKey(configPath)
+		os.Exit(0)
 	}
 
 }
@@ -63,4 +77,33 @@ func checkMissingKeys(requiredKeys []string, config Config) []string {
 	}
 
 	return missingKeys
+}
+
+
+func addOpenAIKey(configPath string) {
+    var openAIKey string
+
+    fmt.Print("Enter your OpenAI key: ")
+    _, err := fmt.Scanln(&openAIKey)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    err = os.MkdirAll(configPath, 0755)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    filePath := filepath.Join(configPath, "config")
+    file, err := os.OpenFile(filePath, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+    if err != nil {
+        log.Fatal(err)
+    }
+    defer file.Close()
+
+    if _, err := file.WriteString("OPENAI_API_KEY=" + openAIKey + "\n"); err != nil {
+        log.Fatal(err)
+    }
+
+    fmt.Println("OpenAI key saved successfully. Kindly run the command again")
 }
