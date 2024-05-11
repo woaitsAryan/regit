@@ -2,8 +2,8 @@ package main
 
 import (
 	"github.com/spf13/cobra"
-	"github.com/woaitsAryan/regit/initializers"
-	"github.com/woaitsAryan/regit/setup"
+	"github.com/woaitsAryan/regit/internal/initializers"
+	"github.com/woaitsAryan/regit/cmd"
 )
 
 var rootCmd = &cobra.Command{
@@ -16,11 +16,11 @@ func init() {
 }
 
 func main() {
-	rootCmd.AddCommand(setup.OwnGitCommand)
-	rootCmd.AddCommand(setup.BlameGitCommand)
-	rootCmd.AddCommand(setup.BlameLinusCommand)
-	rootCmd.AddCommand(setup.RetimeCommand)
-	rootCmd.AddCommand(setup.NukeGitCommand)
-	rootCmd.AddCommand(setup.RecommitGitCommand)
+	rootCmd.AddCommand(cmd.OwnGitCommand)
+	rootCmd.AddCommand(cmd.BlameGitCommand)
+	rootCmd.AddCommand(cmd.BlameLinusCommand)
+	rootCmd.AddCommand(cmd.RetimeCommand)
+	rootCmd.AddCommand(cmd.NukeGitCommand)
+	rootCmd.AddCommand(cmd.RecommitGitCommand)
 	cobra.CheckErr(rootCmd.Execute())
 }

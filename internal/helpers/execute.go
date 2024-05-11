@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"log"
 	"os/exec"
-	"github.com/woaitsAryan/regit/models"
+	"github.com/woaitsAryan/regit/internal/models"
 
 )
 

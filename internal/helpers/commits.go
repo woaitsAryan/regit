@@ -6,7 +6,7 @@ import (
 	"os/exec"
 	"strconv"
 	"strings"
-	"github.com/woaitsAryan/regit/models"
+	"github.com/woaitsAryan/regit/internal/models"
 )
 
 func GetTotalCommits(flags models.Flags) int {

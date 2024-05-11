@@ -2,8 +2,8 @@ package scripts
 
 import (
 	"fmt"
-	"github.com/woaitsAryan/regit/helpers"
-	"github.com/woaitsAryan/regit/models"
+	"github.com/woaitsAryan/regit/internal/helpers"
+	"github.com/woaitsAryan/regit/internal/models"
 )
 
 func NukeGit(file string, flags models.Flags) {

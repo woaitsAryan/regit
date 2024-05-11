@@ -7,8 +7,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/woaitsAryan/regit/helpers"
-	"github.com/woaitsAryan/regit/models"
+	"github.com/woaitsAryan/regit/internal/helpers"
+	"github.com/woaitsAryan/regit/internal/models"
 )
 
 func Retimegit(duration string, flags models.Flags) {

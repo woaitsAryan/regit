@@ -10,9 +10,9 @@ import (
 	"os/exec"
 	"strings"
 
-	"github.com/woaitsAryan/regit/initializers"
-	"github.com/woaitsAryan/regit/helpers"
-	"github.com/woaitsAryan/regit/models"
+	"github.com/woaitsAryan/regit/internal/initializers"
+	"github.com/woaitsAryan/regit/internal/helpers"
+	"github.com/woaitsAryan/regit/internal/models"
 )
 
 func Recommitgit(flags models.Flags) {

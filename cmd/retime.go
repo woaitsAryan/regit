@@ -1,9 +1,9 @@
-package setup
+package cmd
 
 import (
 	"github.com/spf13/cobra"
-	"github.com/woaitsAryan/regit/scripts"
-	"github.com/woaitsAryan/regit/models"
+	"github.com/woaitsAryan/regit/internal/scripts"
+	"github.com/woaitsAryan/regit/internal/models"
 )
 
 var RetimeCommand *cobra.Command
