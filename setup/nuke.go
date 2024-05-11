@@ -3,25 +3,24 @@ package setup
 import (
 	"github.com/spf13/cobra"
 	"github.com/woaitsAryan/regit/scripts"
-)
+	"github.com/woaitsAryan/regit/models"
 
+)
 
 var NukeGitCommand *cobra.Command
 
 func init() {
 	NukeGitCommand = &cobra.Command{
-		Use:   "nuke [path] [file]",
+		Use:   "nuke [file]",
 		Short: "Nuke the file from all the commits.",
-		Args:  cobra.ExactArgs(2),
+		Args:  cobra.ExactArgs(1),
 		Run: func(cmd *cobra.Command, args []string) {
-			path := args[0]
-			file := args[1]
-			flags["verbose"] = verbose
-			flags["quiet"] = quiet
-			scripts.NukeGit(path, file, flags)
+			file := args[0]
+			scripts.NukeGit(file, models.NukeFlags)
 		},
 	}
 
-	NukeGitCommand.PersistentFlags().BoolVarP(&verbose, "verbose", "v", false, "verbose output")
-	NukeGitCommand.PersistentFlags().BoolVarP(&quiet, "quiet", "q", false, "quiet output")
+	NukeGitCommand.PersistentFlags().BoolVarP(&models.NukeFlags.Verbose, "verbose", "v", false, "verbose output")
+	NukeGitCommand.PersistentFlags().BoolVarP(&models.NukeFlags.Verbose, "quiet", "q", false, "quiet output")
+	NukeGitCommand.PersistentFlags().StringVarP(&models.NukeFlags.Source, "source", "s", ".", "path to the git repo")
 }

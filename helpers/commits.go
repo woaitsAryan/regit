@@ -6,10 +6,11 @@ import (
 	"os/exec"
 	"strconv"
 	"strings"
+	"github.com/woaitsAryan/regit/models"
 )
 
-func GetTotalCommits(source string, flags map[string]bool) int {
-	totalCommits := fmt.Sprintf("git -C %s log --oneline | wc -l", source)
+func GetTotalCommits(flags models.Flags) int {
+	totalCommits := fmt.Sprintf("git -C %s log --oneline | wc -l", flags.Source)
 
 	cmd := exec.Command("bash", "-c", totalCommits)
 	output, err := cmd.CombinedOutput()
@@ -21,7 +22,7 @@ func GetTotalCommits(source string, flags map[string]bool) int {
 	if err != nil {
 		log.Fatalf("strconv.Atoi() failed with %s\n", err)
 	}
-	if flags["quiet"] {
+	if flags.Quiet {
 		return outputInt
 	}
 	fmt.Printf("Total number of commits: %d\n", outputInt)

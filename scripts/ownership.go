@@ -6,10 +6,11 @@ import (
 	"strings"
 
 	"github.com/woaitsAryan/regit/helpers"
+	"github.com/woaitsAryan/regit/models"
 )
 
-func Owngit(path string, flags map[string]bool ) {
-	if(!flags["quiet"]){
+func Owngit(flags models.Flags ) {
+	if(!flags.Quiet){
 		fmt.Println("Owning Git..")
 	}
 
@@ -28,7 +29,7 @@ func Owngit(path string, flags map[string]bool ) {
         return
     }
 	email := strings.TrimSpace(string(emailOut))
-	if(flags["verbose"]){
+	if(flags.Verbose){
 		fmt.Printf("Local credentials found! %s <%s>\n", name, email)
 	}
 	ownCmd := []string{
@@ -38,11 +39,11 @@ func Owngit(path string, flags map[string]bool ) {
 		fmt.Sprintf("return b\"%s\"", name),
 		"--force",
 	}	
-	helpers.ExecuteRewrite(path, ownCmd, flags)
+	helpers.ExecuteRewrite(ownCmd, flags)
 }
 
-func Blamegit(path string, name string, email string, flags map[string]bool ){
-	if(!flags["quiet"]){
+func Blamegit(name string, email string, flags models.Flags){
+	if(!flags.Quiet){
 		fmt.Printf("Blaming Git to %s <%s>..\n", name, email)
 	}
 	blameCmd := []string{
@@ -52,5 +53,5 @@ func Blamegit(path string, name string, email string, flags map[string]bool ){
 		fmt.Sprintf("return b\"%s\"", name),
 		"--force",
 	}		
-	helpers.ExecuteRewrite(path, blameCmd, flags)
+	helpers.ExecuteRewrite(blameCmd, flags)
 }

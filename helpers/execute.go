@@ -4,20 +4,22 @@ import (
 	"fmt"
 	"log"
 	"os/exec"
+	"github.com/woaitsAryan/regit/models"
+
 )
 
-func ExecuteRewrite(source string, command []string, flags map[string]bool) {
-	args := append([]string{"filter-repo", "--source", source, "--target", source}, command...)
+func ExecuteRewrite(command []string, flags models.Flags) {
+	args := append([]string{"filter-repo", "--source", flags.Source, "--target", flags.Source}, command...)
 
 	cmd := exec.Command("git", args...)
 	output, err := cmd.CombinedOutput()
 	if err != nil {
 		log.Fatalf("cmd.Run() failed with %s\n", err)
 	}
-	if flags["quiet"] {
+	if flags.Quiet {
 		return
 	}
-	if flags["verbose"] {
+	if flags.Verbose {
 		fmt.Println(string(output))
 	}
 	fmt.Println("Done!")

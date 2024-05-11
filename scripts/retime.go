@@ -4,17 +4,18 @@ import (
 	"fmt"
 	"log"
 	"strconv"
-	"time"
 	"strings"
+	"time"
 
 	"github.com/woaitsAryan/regit/helpers"
+	"github.com/woaitsAryan/regit/models"
 )
 
-func Retimegit(path string, duration string, flags map[string]bool) {
+func Retimegit(duration string, flags models.Flags) {
 
 	fmt.Printf("Dormammu, I've come to bargain.\n")
 
-	commitNum := helpers.GetTotalCommits(path, flags)
+	commitNum := helpers.GetTotalCommits(flags)
 	durationOffset, err := time.ParseDuration("-" + duration)
 	if err != nil {
 		log.Fatal(err)
@@ -26,13 +27,13 @@ func Retimegit(path string, duration string, flags map[string]bool) {
 		log.Fatal(err)
 	}
 
-	if(flags["verbose"]){
+	if(flags.Verbose){
 		fmt.Printf("Start time in Unix seconds is %d\n",durationInt)
 	}
 
 	intervalHop := durationInt * 3600 / commitNum
 
-	if(flags["verbose"]){
+	if(flags.Verbose){
 		fmt.Printf("Interval hop is %d\n",intervalHop)
 	}
 
@@ -47,5 +48,5 @@ func Retimegit(path string, duration string, flags map[string]bool) {
 		`, nowTime, intervalHop),
 		"--force",
 	}
-	helpers.ExecuteRewrite(path, retimeCmd, flags)
+	helpers.ExecuteRewrite(retimeCmd, flags)
 }

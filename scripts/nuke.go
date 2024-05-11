@@ -3,9 +3,10 @@ package scripts
 import (
 	"fmt"
 	"github.com/woaitsAryan/regit/helpers"
+	"github.com/woaitsAryan/regit/models"
 )
 
-func NukeGit(path string, file string, flags map[string]bool) {
+func NukeGit(file string, flags models.Flags) {
 
 	fmt.Println("Now I am become regit, destroyer of Git histories")
 
@@ -16,5 +17,5 @@ func NukeGit(path string, file string, flags map[string]bool) {
 		"--force",
 	}
 
-	helpers.ExecuteRewrite(path, nukeCmd, flags)
+	helpers.ExecuteRewrite(nukeCmd, flags)
 }

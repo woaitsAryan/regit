@@ -12,19 +12,12 @@ import (
 
 	"github.com/woaitsAryan/regit/initializers"
 	"github.com/woaitsAryan/regit/helpers"
+	"github.com/woaitsAryan/regit/models"
 )
 
-type Response struct {
-	Choices []struct {
-		Message struct {
-			Content string `json:"content"`
-		} `json:"message"`
-	} `json:"choices"`
-}
-
-func Recommitgit(source string, flags map[string]bool) {
+func Recommitgit(flags models.Flags) {
 	initializers.LoadEnv()
-	commitDetails := getCommitData(source, flags)
+	commitDetails := getCommitData(flags)
 	newCommitDetails := sendOpenAIMessage(commitDetails, flags)
 	arrLength := len(newCommitDetails)
 	jsonCommitDetails, _ := json.Marshal(newCommitDetails)
@@ -39,32 +32,32 @@ func Recommitgit(source string, flags map[string]bool) {
 		"--force",
 	}
 
-	helpers.ExecuteRewrite(source, recommitCmd, flags)
+	helpers.ExecuteRewrite(recommitCmd, flags)
 }
 
-func getCommitData(source string, flags map[string]bool) []string {
+func getCommitData(flags models.Flags) []string {
 	var commitDetails []string
 
-	out, _ := exec.Command("git", "-C", source, "log", "--pretty=format:%H").Output()
+	out, _ := exec.Command("git", "-C", flags.Source, "log", "--pretty=format:%H").Output()
 	commits := strings.Split(string(out), "\n")
 
 	for _, commit := range commits {
-		out, _ := exec.Command("git", "-C", source, "show", "--no-color", commit).Output()
+		out, _ := exec.Command("git", "-C", flags.Source, "show", "--no-color", commit).Output()
 		commitDetails = append(commitDetails, string(out))
 	}
 
-	if flags["verbose"] {
+	if flags.Verbose {
 		fmt.Println("Captured commit details!")
 	}
 
 	return commitDetails
 }
 
-func sendOpenAIMessage(commitDetails []string, flags map[string]bool) []string {
+func sendOpenAIMessage(commitDetails []string, flags models.Flags) []string {
 
 	fmt.Println("Processing commit details, this might take some time...")
 
-	var respBody Response
+	var respBody models.Response
 	var commitResponseDetails []string
 
 	for i, commit  := range commitDetails {
@@ -109,7 +102,7 @@ func sendOpenAIMessage(commitDetails []string, flags map[string]bool) []string {
 			log.Fatalln(err)
 		}
 		content := respBody.Choices[0].Message.Content
-		if flags["verbose"] {
+		if flags.Verbose {
 			fmt.Printf("Commit %d processed! Generated commit message is %s", i, content )
 		}
 		commitResponseDetails = append(commitResponseDetails, content)

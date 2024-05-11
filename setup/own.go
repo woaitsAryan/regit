@@ -3,11 +3,8 @@ package setup
 import (
 	"github.com/spf13/cobra"
 	"github.com/woaitsAryan/regit/scripts"
+	"github.com/woaitsAryan/regit/models"
 )
-
-var flags = make(map[string]bool)
-var verbose bool
-var quiet bool
 
 var OwnGitCommand *cobra.Command
 var BlameGitCommand *cobra.Command
@@ -15,47 +12,39 @@ var BlameLinusCommand *cobra.Command
 
 func init() {
 	OwnGitCommand = &cobra.Command{
-		Use:   "own [path]",
+		Use:   "own",
 		Short: "Own the commits of a repository",
-		Args:  cobra.ExactArgs(1),
 		Run: func(cmd *cobra.Command, args []string) {
-			path := args[0]
-			flags["verbose"] = verbose
-			flags["quiet"] = quiet
-			scripts.Owngit(path, flags)
+			scripts.Owngit(models.OwnFlags)
 		},
 	}
 
-	OwnGitCommand.PersistentFlags().BoolVarP(&verbose, "verbose", "v", false, "verbose output")
-	OwnGitCommand.PersistentFlags().BoolVarP(&quiet, "quiet", "q", false, "quiet output")
+	OwnGitCommand.PersistentFlags().BoolVarP(&models.OwnFlags.Verbose, "verbose", "v", false, "verbose output")
+	OwnGitCommand.PersistentFlags().BoolVarP(&models.OwnFlags.Quiet, "quiet", "q", false, "quiet output")
+	OwnGitCommand.PersistentFlags().StringVarP(&models.OwnFlags.Source, "source", "s", ".", "path to the git repo")
 
 	BlameGitCommand = &cobra.Command{
-		Use:   "blame [path] [name] [email]",
+		Use:   "blame [name] [email]",
 		Short: "Blame the commits of a repository",
-		Args:  cobra.ExactArgs(3),
+		Args:  cobra.ExactArgs(2),
 		Run: func(cmd *cobra.Command, args []string) {
-			path := args[0]
-			name := args[1]
-			email := args[2]
-			flags["verbose"] = verbose
-			flags["quiet"] = quiet
-			scripts.Blamegit(path, name, email, flags)
+			name := args[0]
+			email := args[1]
+			scripts.Blamegit(name, email, models.BlameFlags)
 		},
 	}
-	BlameGitCommand.PersistentFlags().BoolVarP(&verbose, "verbose", "v", false, "verbose output")
-	BlameGitCommand.PersistentFlags().BoolVarP(&quiet, "quiet", "q", false, "quiet output")
+	BlameGitCommand.PersistentFlags().BoolVarP(&models.BlameFlags.Verbose, "verbose", "v", false, "verbose output")
+	BlameGitCommand.PersistentFlags().BoolVarP(&models.BlameFlags.Verbose, "quiet", "q", false, "quiet output")
+	BlameGitCommand.PersistentFlags().StringVarP(&models.BlameFlags.Source, "source", "s", ".", "path to the git repo")
 
 	BlameLinusCommand = &cobra.Command{
-		Use:   "blame-linus [path]",
+		Use:   "blame-linus",
 		Short: "Give all your commits to Linus :)",
-		Args:  cobra.ExactArgs(1),
 		Run: func(cmd *cobra.Command, args []string) {
-			path := args[0]
-			flags["verbose"] = verbose
-			flags["quiet"] = quiet
-			scripts.Blamegit(path, "torvalds", "torvalds@linux-foundation.org", flags)
+			scripts.Blamegit("torvalds", "torvalds@linux-foundation.org", models.BlameFlags)
 		},
 	}
-	BlameLinusCommand.PersistentFlags().BoolVarP(&verbose, "verbose", "v", false, "verbose output")
-	BlameLinusCommand.PersistentFlags().BoolVarP(&quiet, "quiet", "q", false, "quiet output")
+	BlameLinusCommand.PersistentFlags().BoolVarP(&models.BlameFlags.Verbose, "verbose", "v", false, "verbose output")
+	BlameLinusCommand.PersistentFlags().BoolVarP(&models.BlameFlags.Quiet, "quiet", "q", false, "quiet output")
+	BlameLinusCommand.PersistentFlags().StringVarP(&models.BlameFlags.Source, "source", "s", ".", "path to the git repo")
 }
