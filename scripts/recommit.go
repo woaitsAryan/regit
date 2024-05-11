@@ -70,7 +70,7 @@ func sendOpenAIMessage(commitDetails []string, flags map[string]bool) []string {
 	for i, commit  := range commitDetails {
 
 		body := map[string]interface{}{
-			"model": "gpt-3.5-turbo",
+			"model": initializers.OPENAI_MODEL,
 			"messages": []map[string]interface{}{
 				{
 					"role":    "system",
@@ -86,7 +86,7 @@ func sendOpenAIMessage(commitDetails []string, flags map[string]bool) []string {
 		bodyBytes, _ := json.Marshal(body)
 		OPENAI_API_KEY := initializers.CONFIG.OPENAI_API_KEY
 
-		req, _ := http.NewRequest("POST", "https://api.openai.com/v1/chat/completions", bytes.NewBuffer(bodyBytes))
+		req, _ := http.NewRequest("POST", initializers.OPENAI_URL, bytes.NewBuffer(bodyBytes))
 		req.Header.Set("Content-Type", "application/json")
 		req.Header.Set("Authorization", "Bearer "+OPENAI_API_KEY)
 
