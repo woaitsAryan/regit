@@ -630,6 +630,12 @@ brews:
     # SPDX identifier of your app's license.
     license: "MIT"
 
+    test: |
+      system "#{bin}/regit help"
+
+    install: |
+      bin.install "regit"
+
     # Setting this will prevent goreleaser to actually try to commit the updated
     # formula - instead, the formula file will be stored on the dist directory
     # only, leaving the responsibility of publishing it to the user.
