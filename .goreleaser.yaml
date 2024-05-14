@@ -147,7 +147,7 @@ winget:
     # Path for the file inside the repository.
     #
     # Default: manifests/<lowercased first char of publisher>/<publisher>/<version>
-    path: manifests/g/goreleaser/1.19
+    path: manifests/r/regit/0.1.4
 
     # Your app's homepage.
     homepage: "https://github.com/woaitsAryan/regit"
@@ -180,7 +180,7 @@ winget:
     # in case there is an indicator for prerelease in the tag e.g. v1.0.0-rc1
     #
     # Templates: allowed
-    skip_upload: true
+    skip_upload: false
 
     # Release notes.
     #
@@ -225,7 +225,7 @@ winget:
       #
       # Default: default repository branch
       # Templates: allowed
-      branch: main
+      branch: master
 
       # Optionally a token can be provided, if it differs from the token
       # provided to GoReleaser
