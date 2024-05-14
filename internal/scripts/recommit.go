@@ -11,8 +11,6 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/charmbracelet/huh/spinner"
-
 	"github.com/woaitsAryan/regit/internal/helpers"
 	"github.com/woaitsAryan/regit/internal/initializers"
 	"github.com/woaitsAryan/regit/internal/models"
@@ -58,14 +56,7 @@ func getCommitData(flags models.Flags) []string {
 }
 
 func sendOpenAIMessage(commitDetails []string, flags models.Flags) []string {
-	err := spinner.New().
-		Type(spinner.Line).
-		Title(fmt.Sprintf(" Processing %d commits, this might take some time...", len(commitDetails))).
-		Accessible(false).
-		Run()
-	if err != nil {
-		log.Fatalln(err)
-	}
+	fmt.Printf("Processing %d commits, this might take some time...\n", len(commitDetails))
 
 	var commitResponseDetails []string
 
