@@ -95,7 +95,7 @@ winget:
     #
     # Default: Publisher.ProjectName
     # Templates: allowed
-    package_identifier: aryanbharti.regit
+    package_identifier: woaitsAryan.regit
 
     # IDs of the archives to use.
     # Empty means all IDs.
@@ -142,12 +142,12 @@ winget:
     # The project name and current git tag are used in the format string.
     #
     # Templates: allowed
-    commit_msg_template: "{{ .PackageIdentifier }}: {{ .Tag }}"
+    commit_msg_template: "New Package: {{ .PackageIdentifier }}: {{ .Tag }}"
 
     # Path for the file inside the repository.
     #
     # Default: manifests/<lowercased first char of publisher>/<publisher>/<version>
-    path: manifests/r/regit/0.1.4
+    path: manifests/w/woaitsAryan/regit/0/0.1.4
 
     # Your app's homepage.
     homepage: "https://github.com/woaitsAryan/regit"
