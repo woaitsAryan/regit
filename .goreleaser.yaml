@@ -611,7 +611,7 @@ brews:
     # The project name and current git tag are used in the format string.
     #
     # Templates: allowed
-    commit_msg_template: "New version: {{ .ProjectName }} version {{ .Tag }}"
+    commit_msg_template: "{{ .ProjectName }} {{ .Tag }}"
 
     # Directory inside the repository to put the formula.
     directory: Formula
