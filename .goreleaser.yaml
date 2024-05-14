@@ -625,7 +625,7 @@ brews:
     # Your app's description.
     #
     # Templates: allowed
-    description: "Software to create fast and easy drum rolls."
+    description: "regit is a CLI tool written in Golang with several features to manage git repositories and histories."
 
     # SPDX identifier of your app's license.
     license: "MIT"
