@@ -147,7 +147,7 @@ winget:
     # Path for the file inside the repository.
     #
     # Default: manifests/<lowercased first char of publisher>/<publisher>/<version>
-    path: manifests/w/woaitsAryan/regit/0/0.1.4
+    path: manifests/w/woaitsAryan/regit/0.2.1
 
     # Your app's homepage.
     homepage: "https://github.com/woaitsAryan/regit"
