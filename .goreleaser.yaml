@@ -639,28 +639,6 @@ brews:
     # Templates: allowed
     skip_upload: false
 
-    # Custom block for brew.
-    # Can be used to specify alternate downloads for devel or head releases.
-    custom_block: |
-      head "https://github.com/woaitsAryan/regit"
-      ...
-
-
-    # Additional install instructions so you don't need to override `install`.
-    #
-    # Template: allowed
-    # Since: v1.20
-    # extra_install: |
-    #   bash_completion.install "completions/foo.bash" => "foo"
-    #   man1.install "man/foo.1.gz"
-    #   # ...
-
-    # Custom post_install script for brew.
-    # Could be used to do any additional work after the "install" script
-    # post_install: |
-    #     etc.install "app-config.conf"
-    #   # ...
-
     # Repository to push the generated files to.
     repository:
       # Repository owner.
