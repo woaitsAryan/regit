@@ -601,7 +601,7 @@ brews:
     commit_msg_template: "{{ .ProjectName }} {{ .Tag }}"
 
     # Directory inside the repository to put the formula.
-    directory: Formula
+    directory: Formula/r
 
     # Caveats for the user of your binary.
     caveats: "Just run the command by typing regit, the help menu will assist you"
@@ -618,7 +618,7 @@ brews:
     license: "MIT"
 
     test: |
-      system "#{bin}/regit, "help"
+      system "#{bin}/regit, help"
 
     install: |
       bin.install "regit"
