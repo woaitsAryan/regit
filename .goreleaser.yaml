@@ -53,9 +53,6 @@ changelog:
       - "^docs:"
       - "^test:"
 
-universal_binaries:
-  - replace: true
-
 winget:
   - # Name of the recipe
     #
@@ -612,13 +609,13 @@ brews:
     # Your app's description.
     #
     # Templates: allowed
-    description: "A CLI tool to manage git repositories and histories"
+    description: "CLI tool to manage git repositories and histories"
 
     # SPDX identifier of your app's license.
     license: "MIT"
 
     test: |
-      system "#{bin}/regit, help"
+      system "#{bin}/regit", "help"
 
     install: |
       bin.install "regit"
