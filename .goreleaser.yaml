@@ -586,19 +586,6 @@ brews:
     # Templates: allowed
     url_template: "https://github.com/woaitsAryan/regit/releases/download/{{ .Tag }}/{{ .ArtifactName }}"
 
-    # Headers to include in the `url` stanza.
-    # This can be a more modern alternative to `download_strategy` in some
-    # cases.
-    #
-    # Since: v1.25
-    url_headers:
-      - "Accept: application/octet-stream"
-
-    # Allows you to set a custom download strategy. Note that you'll need
-    # to implement the strategy and add it to your tap repository.
-    # Example: https://docs.brew.sh/Formula-Cookbook#specifying-the-download-strategy-explicitly
-    download_strategy: CurlDownloadStrategy
-
     # Allows you to add a custom require_relative at the top of the formula
     # template.
     # custom_require: custom_download_strategy
@@ -625,13 +612,13 @@ brews:
     # Your app's description.
     #
     # Templates: allowed
-    description: "regit is a CLI tool written in Golang with several features to manage git repositories and histories."
+    description: "A CLI tool to manage git repositories and histories"
 
     # SPDX identifier of your app's license.
     license: "MIT"
 
     test: |
-      system "#{bin}/regit help"
+      system "#{bin}/regit, "help"
 
     install: |
       bin.install "regit"
