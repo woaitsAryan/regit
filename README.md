@@ -1,6 +1,6 @@
 <br />
 <div align="center">
-    <img src="static/icon.png" alt="Logo" width="150" height="150">
+    <img src="static/icon_transparent.png" alt="Logo" width="150" height="150">
 
   <h3 align="center">regit</h3>
 
@@ -30,26 +30,17 @@ Using regit multiple times might cause object corruption in your git repository.
 
 <h3>Windows</h3>
 
-<pre><code>
-python3 -m pip install --user git-filter-repo
-
-winget install regit
-</code></pre>
+<pre><code>python3 -m pip install --user git-filter-repo</pre></code>
+<pre><code>winget install regit</code></pre>
 
 <h3>macOS</h3>
 
-<pre><code>
-git clone https://github.com/woaitsAryan/regit && cd regit
-
-make setup
-</code></pre>
+<pre><code>git clone https://github.com/woaitsAryan/regit && cd regit</pre></code>
+<pre><code>make setup</code></pre>
 
 <h3>Linux</h3>
-<pre><code>
-git clone https://github.com/woaitsAryan/regit && cd regit
-
-make setup
-</code></pre>
+<pre><code>git clone https://github.com/woaitsAryan/regit && cd regit</pre></code>
+<pre><code>make setup</code></pre>
 
 <h2 name="docs">Docs</h2>
 <p>Regit currently supports 5 commands:</p>
