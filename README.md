@@ -1,50 +1,67 @@
+<br />
+<div align="center">
+    <img src="static/icon.png" alt="Logo" width="150" height="150">
 
-# Regit
+  <h3 align="center">regit</h3>
 
-Regit is a friendly CLI tool written in Golang that allows you to rewrite entire git histories. With Regit, you can make yourself or anyone else the author of all the commits in a repository. It can also change the time of all the commits to be of past x amount of hours.
+  <p align="center">
+    CLI tool to manage git repositories and histories
+    <br />
+    <br />
+    <a href="#installation">Installation</a>
+    ·
+    <a href="#docs">Docs</a>
+    ·
+    <a href="https://github.com/woaitsAryan/regit/issues/new?labels=enhancement&template=feature-request---.md">Request Features</a>
+    ·
+   <a href="https://github.com/woaitsAryan/regit/issues/new?labels=bug&template=bug-report---.md">Report Bug</a>
+  </p>
+</div>
+
+
+<h1 align="center">Regit</h1>
+
+Regit is a CLI tool written in Go that allows you to rewrite git histories. Changing ownership, timestamps, even commit messages to follow conventions, all in a single command
 
 ## Warning
 Using regit multiple times might cause object corruption in your git repository. Please use it after backup up your .git folder.
 
-## Installation
+<h2 name="installation">Installation</h2>
 
-To run Regit, you can either use the provided executable or build your own. 
+<h3>Windows</h3>
 
-To use the provided executable, setup the executable and run it:
+<pre><code>
+python3 -m pip install --user git-filter-repo
 
-```bash
+winget install regit
+</code></pre>
+
+<h3>macOS</h3>
+
+<pre><code>
+git clone https://github.com/woaitsAryan/regit && cd regit
+
 make setup
+</code></pre>
 
-./regit help
-```
+<h3>Linux</h3>
+<pre><code>
+git clone https://github.com/woaitsAryan/regit && cd regit
 
-To build your own executable, ensure that Go is installed and run:
-    
-```bash
-make build
-```
+make setup
+</code></pre>
 
-## Usage
-Regit currently supports three commands:
-1. `./regit own <path>`: This command makes you the author of all the commits in the repository at `<path>`. `<path>` should be the absolute path to the git repository, which can be obtained by running `pwd` in the root of the git repository.
+<h2 name="docs">Docs</h2>
+<p>Regit currently supports 5 commands:</p>
+<ol>
+  <li><code>regit recommit</code>: Reads all the commit diffs and writes better commit messages, then commits them again.</li>
+  <li><code>regit own</code>: Makes you the author of all the commits.</li>
+  <li><code>regit blame &lt;name&gt; &lt;email&gt;</code>: Makes the user specified by <code>&lt;name&gt;</code> and <code>&lt;email&gt;</code> the author of all the commits.</li>
+  <li><code>regit nuke /path/to/file</code>: Removes the file specified from all the commits in the repository.</li>
+  <li><code>regit retime &lt;duration&gt;</code>: Rewrites the commit times of all the commits in the repository to be of <code>x</code> hours in the past, evenly spaced. Can be any number of hours.</li>
+</ol>
+<p><strong>--path</strong> flag can be used to specify the path of the repository. If not specified, the current directory is used.</p>
 
-Example:
-```bash
-./regit own /home/user/my-git-repo
-```
-2. `./regit blame <path> <name> <email>`: This command makes the user specified by `<name>` and `<email>` the author of all the commits in the repository at `<path>`.
-
-Example:
-```bash
-./regit blame /home/user/my-git-repo "John Doe" "johndoe@example.com"
-```
-
-3. `./regit retime /home/user/my-git-repo `x`h`: This command rewrites the commit times of all the commits in the repository at `<path>` to be `x` hours in the past. Can be any number of hours.
-
-Example: 
-```bash
-./regit retime /home/user/my-git-repo 24h
-```
 
 ## Credits
 Regit uses [git-filter-repo](https://github.com/newren/git-filter-repo) under the hood to rewrite git histories. I would like to thank the authors and contributors of git-filter-repo for their work. 
