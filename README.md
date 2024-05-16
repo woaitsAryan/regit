@@ -2,7 +2,7 @@
 <div align="center">
     <img src="static/icon_transparent.png" alt="Logo" width="150" height="150">
 
-  <h3 align="center">regit</h3>
+  <h1 align="center">Regit</h3>
 
   <p align="center">
     CLI tool to manage git repositories and histories
@@ -19,9 +19,9 @@
 </div>
 
 
-<h1 align="center">Regit</h1>
-
+<p align="center">
 Regit is a CLI tool written in Go that allows you to rewrite git histories. Changing ownership, timestamps, even commit messages to follow conventions, all in a single command
+</p>
 
 ## Warning
 Using regit multiple times might cause object corruption in your git repository. Please use it after backup up your .git folder.
