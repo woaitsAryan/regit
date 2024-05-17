@@ -247,7 +247,7 @@ snapcrafts:
     # Disable this configuration.
     #
     # Templates: allowed (since v1.20)
-    disable: true
+    disable: false
 
     # Channels in store where snap will be pushed.
     #
