@@ -201,391 +201,324 @@ winget:
       branch: master
       
 # .goreleaser.yaml
-# snapcrafts:
-#   - #
-#     # ID of the snapcraft config, must be unique.
-#     #
-#     # Default: 'default'
-#     id: regit
+snapcrafts:
+  - #
+    # ID of the snapcraft config, must be unique.
+    #
+    # Default: 'default'
+    id: regit
 
-#     #
-#     # Default: '{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}{{ with .Arm }}v{{ . }}{{ end }}{{ with .Mips }}_{{ . }}{{ end }}{{ if not (eq .Amd64 "v1") }}{{ .Amd64 }}{{ end }}'
-#     # Templates: allowed
-#     name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+    #
+    # Default: '{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}{{ with .Arm }}v{{ . }}{{ end }}{{ with .Mips }}_{{ . }}{{ end }}{{ if not (eq .Amd64 "v1") }}{{ .Amd64 }}{{ end }}'
+    # Templates: allowed
+    name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
 
-#     # The name of the snap. This is optional.
-#     #
-#     # Default: ProjectName
-#     name: regit
+    # The name of the snap. This is optional.
+    #
+    # Default: ProjectName
+    name: regit
 
-#     # The canonical title of the application, displayed in the software
-#     # centre graphical frontends.
-#     #
-#     # Since: v1.19
-#     title: Regit
+    # The canonical title of the application, displayed in the software
+    # centre graphical frontends.
+    #
+    # Since: v1.19
+    title: Regit
 
-#     # Path to icon image that represents the snap in the snapcraft.io store
-#     # pages and other graphical store fronts.
-#     #
-#     # Since: v1.19
-#     icon: static/icon.png
+    # Path to icon image that represents the snap in the snapcraft.io store
+    # pages and other graphical store fronts.
+    #
+    # Since: v1.19
+    icon: static/icon.png
 
-#     # Whether to publish the snap to the snapcraft store.
-#     # Remember you need to `snapcraft login` first.
-#     publish: true
+    # Whether to publish the snap to the snapcraft store.
+    # Remember you need to `snapcraft login` first.
+    publish: true
 
-#     # Single-line elevator pitch for your amazing snap.
-#     # 79 char long at most.
-#     summary: Software to create fast and easy drum rolls.
+    # Single-line elevator pitch for your amazing snap.
+    # 79 char long at most.
+    summary: CLI tool to manage git repositories and histories
 
-#     # This the description of your snap. You have a paragraph or two to tell the
-#     # most important story about your snap. Keep it under 100 words though,
-#     # we live in tweetspace and your description wants to look good in the snap
-#     # store.
-#     description: This is the best drum roll application out there. Install it and awe!
+    # This the description of your snap. You have a paragraph or two to tell the
+    # most important story about your snap. Keep it under 100 words though,
+    # we live in tweetspace and your description wants to look good in the snap
+    # store.
+    description: Regit is a CLI tool written in Go to efficiently rewrite git histories by changing ownership, timestamps, commit messages in just one command
 
-#     # Disable this configuration.
-#     #
-#     # Templates: allowed (since v1.20)
-#     disable: true
+    # Disable this configuration.
+    #
+    # Templates: allowed (since v1.20)
+    disable: true
 
-#     # Channels in store where snap will be pushed.
-#     #
-#     # More info about channels here:
-#     # https://snapcraft.io/docs/reference/channels
-#     #
-#     # Default:
-#     #   grade is 'stable': ["edge", "beta", "candidate", "stable"]
-#     #   grade is 'devel': ["edge", "beta"]
-#     # Templates: allowed (since v1.15)
-#     channel_templates:
-#       - edge
-#       - beta
-#       - candidate
-#       - stable
-#       - "{{ .Major }}.{{ .Minor }}/edge"
-#       - "{{ .Major }}.{{ .Minor }}/beta"
-#       - "{{ .Major }}.{{ .Minor }}/candidate"
-#       - "{{ .Major }}.{{ .Minor }}/stable"
+    # Channels in store where snap will be pushed.
+    #
+    # More info about channels here:
+    # https://snapcraft.io/docs/reference/channels
+    #
+    # Default:
+    #   grade is 'stable': ["edge", "beta", "candidate", "stable"]
+    #   grade is 'devel': ["edge", "beta"]
+    # Templates: allowed (since v1.15)
+    channel_templates:
+      - edge
+      - beta
+      - candidate
+      - stable
+      - "{{ .Major }}.{{ .Minor }}/edge"
+      - "{{ .Major }}.{{ .Minor }}/beta"
+      - "{{ .Major }}.{{ .Minor }}/candidate"
+      - "{{ .Major }}.{{ .Minor }}/stable"
 
-#     # A guardrail to prevent you from releasing a snap to all your users before
-#     # it is ready.
-#     # `devel` will let you release only to the `edge` and `beta` channels in the
-#     # store. `stable` will let you release also to the `candidate` and `stable`
-#     # channels.
-#     grade: stable
+    # A guardrail to prevent you from releasing a snap to all your users before
+    # it is ready.
+    # `devel` will let you release only to the `edge` and `beta` channels in the
+    # store. `stable` will let you release also to the `candidate` and `stable`
+    # channels.
+    grade: stable
 
-#     # Snaps can be setup to follow three different confinement policies:
-#     # `strict`, `devmode` and `classic`. A strict confinement where the snap
-#     # can only read and write in its own namespace is recommended. Extra
-#     # permissions for strict snaps can be declared as `plugs` for the app, which
-#     # are explained later. More info about confinement here:
-#     # https://snapcraft.io/docs/reference/confinement
-#     confinement: strict
+    # Snaps can be setup to follow three different confinement policies:
+    # `strict`, `devmode` and `classic`. A strict confinement where the snap
+    # can only read and write in its own namespace is recommended. Extra
+    # permissions for strict snaps can be declared as `plugs` for the app, which
+    # are explained later. More info about confinement here:
+    # https://snapcraft.io/docs/reference/confinement
+    confinement: devmode
 
-#     # Your app's license, based on SPDX license expressions:
-#     # https://spdx.org/licenses
-#     license: MIT
+    # Your app's license, based on SPDX license expressions:
+    # https://spdx.org/licenses
+    license: MIT
 
-#     # A snap of type base to be used as the execution environment for this snap.
-#     # Valid values are:
-#     # * bare - Empty base snap;
-#     # * core - Ubuntu Core 16;
-#     # * core18 - Ubuntu Core 18.
-#     base: core18
+    # A snap of type base to be used as the execution environment for this snap.
+    # Valid values are:
+    # * bare - Empty base snap;
+    # * core - Ubuntu Core 16;
+    # * core18 - Ubuntu Core 18.
+    base: core18
 
-#     # A list of features that must be supported by the core in order for
-#     # this snap to install.
-#     #
-#     # Since: v1.19
-#     assumes:
-#       - snapd2.38
+    # A list of features that must be supported by the core in order for
+    # this snap to install.
+    #
+    # Since: v1.19
+    assumes:
+      - snapd2.38
 
-#     # his top-level keyword to define a hook with a plug to access more
-#     # privileges.
-#     #
-#     # Since: v1.19
-#     hooks:
-#       install:
-#         - network
+    # his top-level keyword to define a hook with a plug to access more
+    # privileges.
+    #
+    # Since: v1.19
+    hooks:
+      install:
+        - network
 
-#     # Add extra files on the resulting snap. Useful for including wrapper
-#     # scripts or other useful static files. Source filenames are relative to the
-#     # project directory. Destination filenames are relative to the snap prime
-#     # directory.
-#     extra_files:
-#       - source: drumroll.wrapper
-#         destination: bin/drumroll.wrapper
-#         mode: 0755
+    # Add extra files on the resulting snap. Useful for including wrapper
+    # scripts or other useful static files. Source filenames are relative to the
+    # project directory. Destination filenames are relative to the snap prime
+    # directory.
+    # extra_files:
+    #   - source: drumroll.wrapper
+    #     destination: bin/drumroll.wrapper
+    #     mode: 0755
 
-#     # Additional templated extra files to add to the package.
-#     # Those files will have their contents pass through the template engine,
-#     # and its results will be added to the package.
-#     #
-#     # This feature is only available in GoReleaser Pro.
-#     # Since: v1.17 (pro)
-#     # Templates: allowed
-#     templated_extra_files:
-#       - source: LICENSE.tpl
-#         destination: LICENSE.txt
-#         mode: 0644
+    # With layouts, you can make elements in $SNAP, $SNAP_DATA, $SNAP_COMMON
+    # accessible from locations such as /usr, /var and /etc. This helps when
+    # using pre-compiled binaries and libraries that expect to find files and
+    # directories outside of locations referenced by $SNAP or $SNAP_DATA.
+    # About snap environment variables:
+    # * HOME: set to SNAP_USER_DATA for all commands
+    # * SNAP: read-only install directory
+    # * SNAP_ARCH: the architecture of device (eg, amd64, arm64, armhf, i386, etc)
+    # * SNAP_DATA: writable area for a particular revision of the snap
+    # * SNAP_COMMON: writable area common across all revisions of the snap
+    # * SNAP_LIBRARY_PATH: additional directories which should be added to LD_LIBRARY_PATH
+    # * SNAP_NAME: snap name
+    # * SNAP_INSTANCE_NAME: snap instance name incl. instance key if one is set (snapd 2.36+)
+    # * SNAP_INSTANCE_KEY: instance key if any (snapd 2.36+)
+    # * SNAP_REVISION: store revision of the snap
+    # * SNAP_USER_DATA: per-user writable area for a particular revision of the snap
+    # * SNAP_USER_COMMON: per-user writable area common across all revisions of the snap
+    # * SNAP_VERSION: snap version (from snap.yaml)
+    # More info about layout here:
+    # https://snapcraft.io/docs/snap-layouts
+    layout:
+      # The path you want to access in sandbox.
+      /etc/drumroll:
+        # Which outside file or directory you want to map to sandbox.
+        # Valid keys are:
+        # * bind - Bind-mount a directory.
+        # * bind_file - Bind-mount a file.
+        # * symlink - Create a symbolic link.
+        # * type - Mount a private temporary in-memory filesystem.
+        bind: $SNAP_DATA/etc
 
-#     # With layouts, you can make elements in $SNAP, $SNAP_DATA, $SNAP_COMMON
-#     # accessible from locations such as /usr, /var and /etc. This helps when
-#     # using pre-compiled binaries and libraries that expect to find files and
-#     # directories outside of locations referenced by $SNAP or $SNAP_DATA.
-#     # About snap environment variables:
-#     # * HOME: set to SNAP_USER_DATA for all commands
-#     # * SNAP: read-only install directory
-#     # * SNAP_ARCH: the architecture of device (eg, amd64, arm64, armhf, i386, etc)
-#     # * SNAP_DATA: writable area for a particular revision of the snap
-#     # * SNAP_COMMON: writable area common across all revisions of the snap
-#     # * SNAP_LIBRARY_PATH: additional directories which should be added to LD_LIBRARY_PATH
-#     # * SNAP_NAME: snap name
-#     # * SNAP_INSTANCE_NAME: snap instance name incl. instance key if one is set (snapd 2.36+)
-#     # * SNAP_INSTANCE_KEY: instance key if any (snapd 2.36+)
-#     # * SNAP_REVISION: store revision of the snap
-#     # * SNAP_USER_DATA: per-user writable area for a particular revision of the snap
-#     # * SNAP_USER_COMMON: per-user writable area common across all revisions of the snap
-#     # * SNAP_VERSION: snap version (from snap.yaml)
-#     # More info about layout here:
-#     # https://snapcraft.io/docs/snap-layouts
-#     layout:
-#       # The path you want to access in sandbox.
-#       /etc/drumroll:
-#         # Which outside file or directory you want to map to sandbox.
-#         # Valid keys are:
-#         # * bind - Bind-mount a directory.
-#         # * bind_file - Bind-mount a file.
-#         # * symlink - Create a symbolic link.
-#         # * type - Mount a private temporary in-memory filesystem.
-#         bind: $SNAP_DATA/etc
+    # Each binary built by GoReleaser is an app inside the snap. In this section
+    # you can declare extra details for those binaries. It is optional.
+    # See: https://snapcraft.io/docs/snapcraft-app-and-service-metadata
+    apps:
+      # The name of the app must be the same name as the binary built or the snapcraft name.
+      regit:
+        # If you any to pass args to your binary, you can add them with the
+        # args option.
+        args: --quiet, --verbose, --path
 
-#     # Each binary built by GoReleaser is an app inside the snap. In this section
-#     # you can declare extra details for those binaries. It is optional.
-#     # See: https://snapcraft.io/docs/snapcraft-app-and-service-metadata
-#     apps:
-#       # The name of the app must be the same name as the binary built or the snapcraft name.
-#       drumroll:
-#         # If you any to pass args to your binary, you can add them with the
-#         # args option.
-#         args: --foo
+        # The kind of wrapper to generate for the given command.
+        #
+        # Since: v1.6
+        adapter: none
 
-#         # The kind of wrapper to generate for the given command.
-#         #
-#         # Since: v1.6
-#         adapter: none
+        # D-Bus name this service is reachable as. Mandatory if daemon=dbus.
+        #
+        # Since: v1.6
+        bus_name: drumbus
 
-#         # List of applications that are ordered to be started after the current
-#         # one.
-#         #
-#         # Since: v1.6
-#         after: ["postdrum"]
+        # A list of commands to be executed in order before the command of this
+        # app.
+        #
+        # Since: v1.6
+        # An identifier to a desktop-id within an external appstream file.
+        # https://snapcraft.io/docs/using-external-metadata
+        #
+        # Since: v1.6
+        common_id: "com.example.drumroll"
 
-#         # Aliases for the app command.
-#         # https://snapcraft.io/docs/commands-and-aliases#heading--aliases
-#         #
-#         # Since: v1.6
-#         aliases: ["droll"]
+        # Bash completion snippet. More information about completion here:
+        # https://snapcraft.io/docs/tab-completion.
+        completer: drumroll-completion.bash
 
-#         # Defines the name of the .desktop file used to start an application
-#         # with the desktop session.
-#         # https://snapcraft.io/docs/snap-format#heading--autostart
-#         #
-#         # Since: v1.6
-#         autostart: drumroll.desktop
+        # You can override the command name.
+        #
+        # Default: AppName
+        command: bin/drumroll.wrapper
 
-#         # List of applications that are ordered to be started before the current
-#         # one.
-#         #
-#         # Since: v1.6
-#         before: ["predrum"]
+        # If you want your app to be autostarted and to always run in the
+        # background, you can make it a simple daemon.
+        daemon: simple
 
-#         # D-Bus name this service is reachable as. Mandatory if daemon=dbus.
-#         #
-#         # Since: v1.6
-#         bus_name: drumbus
+        # Location of the .desktop file.
+        #
+        # Since: v1.6
+        desktop: usr/share/applications/drumroll.desktop
 
-#         # A list of commands to be executed in order before the command of this
-#         # app.
-#         #
-#         # Since: v1.6
-#         command_chain: ["foo", "bar", "baz"]
+        # A set of key-value pairs specifying environment variables.
+        #
+        # Since: v1.6
+        environment:
+          foo: bar
+          baz: quo
 
-#         # An identifier to a desktop-id within an external appstream file.
-#         # https://snapcraft.io/docs/using-external-metadata
-#         #
-#         # Since: v1.6
-#         common_id: "com.example.drumroll"
+        # A list of Snapcraft extensions this app depends on.
+        # https://snapcraft.io/docs/snapcraft-extensions
+        #
+        # Since: v1.6
+        extensions: ["gnome-3-38"]
 
-#         # Bash completion snippet. More information about completion here:
-#         # https://snapcraft.io/docs/tab-completion.
-#         completer: drumroll-completion.bash
+        # Defines whether a freshly installed daemon is started automatically,
+        # or whether startup control is deferred to the snap.
+        # Requires `daemon` to be set.
+        #
+        # Since: v1.6
+        install_mode: "disable"
 
-#         # You can override the command name.
-#         #
-#         # Default: AppName
-#         command: bin/drumroll.wrapper
+        # A set of key-value attributes passed through to snap.yaml without
+        # snapcraft validation.
+        # https://snapcraft.io/docs/using-in-development-features
+        #
+        # Since: v1.6
+        passthrough:
+          foo: bar
 
-#         # If you want your app to be autostarted and to always run in the
-#         # background, you can make it a simple daemon.
-#         daemon: simple
+        # If your app requires extra permissions to work outside of its default
+        # confined space, declare them here.
+        # You can read the documentation about the available plugs and the
+        # things they allow:
+        # https://snapcraft.io/docs/supported-interfaces.
+        plugs: ["home", "network", "personal-files"]
 
-#         # Location of the .desktop file.
-#         #
-#         # Since: v1.6
-#         desktop: usr/share/applications/drumroll.desktop
+        # Sets a command to run from inside the snap after a service stops.
+        #
+        # Since: v1.6
+        post_stop_command: foo
 
-#         # A set of key-value pairs specifying environment variables.
-#         #
-#         # Since: v1.6
-#         environment:
-#           foo: bar
-#           baz: quo
+        # Controls whether the daemon should be restarted during a snap refresh.
+        #
+        # Since: v1.6
+        refresh_mode: endure
 
-#         # A list of Snapcraft extensions this app depends on.
-#         # https://snapcraft.io/docs/snapcraft-extensions
-#         #
-#         # Since: v1.6
-#         extensions: ["gnome-3-38"]
+        # Command to use to ask the service to reload its configuration.
+        # Requires `daemon` to be set.
+        #
+        # Since: v1.6
+        reload_command: foo
 
-#         # Defines whether a freshly installed daemon is started automatically,
-#         # or whether startup control is deferred to the snap.
-#         # Requires `daemon` to be set.
-#         #
-#         # Since: v1.6
-#         install_mode: "disable"
+        # Restart condition of the snap.
+        # https://snapcraft.io/docs/snapcraft-yaml-reference
+        restart_condition: "always"
 
-#         # A set of key-value attributes passed through to snap.yaml without
-#         # snapcraft validation.
-#         # https://snapcraft.io/docs/using-in-development-features
-#         #
-#         # Since: v1.6
-#         passthrough:
-#           foo: bar
+        # List of slots for interfaces to connect to.
+        #
+        # Since: v1.6
+        slots: ["foo", "bar", "baz"]
 
-#         # If your app requires extra permissions to work outside of its default
-#         # confined space, declare them here.
-#         # You can read the documentation about the available plugs and the
-#         # things they allow:
-#         # https://snapcraft.io/docs/supported-interfaces.
-#         plugs: ["home", "network", "personal-files"]
+        # Maps a daemon’s sockets to services and activates them.
+        # Requires `plugs` to contain `network-bind`.
+        #
+        # Since: v1.6
+        sockets:
+          sock:
+            listen-stream: $SNAP_COMMON/socket
+            socket-group: socket-group
+            socket-mode: 416
 
-#         # Sets a command to run from inside the snap after a service stops.
-#         #
-#         # Since: v1.6
-#         post_stop_command: foo
+        # Time to wait for daemon to start.
+        #
+        # Since: v1.6
+        start_timeout: 42ms
 
-#         # Controls whether the daemon should be restarted during a snap refresh.
-#         #
-#         # Since: v1.6
-#         refresh_mode: endure
+        # Command to use to stop the service.
+        # Requires `daemon` to be set.
+        #
+        # Since: v1.6
+        stop_command: foo
 
-#         # Command to use to ask the service to reload its configuration.
-#         # Requires `daemon` to be set.
-#         #
-#         # Since: v1.6
-#         reload_command: foo
+        # Controls how the daemon should be stopped.
+        # Requires `daemon` to be set.
+        #
+        # Since: v1.6
+        stop_mode: sigterm
 
-#         # Restart condition of the snap.
-#         # https://snapcraft.io/docs/snapcraft-yaml-reference
-#         restart_condition: "always"
+        # Time to wait for daemon to stop.
+        #
+        # Since: v1.6
+        stop_timeout: 42ms
 
-#         # List of slots for interfaces to connect to.
-#         #
-#         # Since: v1.6
-#         slots: ["foo", "bar", "baz"]
+        # Schedules when, or how often, to run a service or command.
+        # Requires `daemon` to be set.
+        # https://snapcraft.io/docs/services-and-daemons
+        #
+        # Since: v1.6
+        timer: "00:00-24:00/24"
 
-#         # Maps a daemon’s sockets to services and activates them.
-#         # Requires `plugs` to contain `network-bind`.
-#         #
-#         # Since: v1.6
-#         sockets:
-#           sock:
-#             listen-stream: $SNAP_COMMON/socket
-#             socket-group: socket-group
-#             socket-mode: 416
+        # Declares the service watchdog timeout.
+        # Requires `plugs` to contain `daemon-notify`.
+        #
+        # Since: v1.6
+        watchdog_timeout: 42ms
 
-#         # Time to wait for daemon to start.
-#         #
-#         # Since: v1.6
-#         start_timeout: 42ms
-
-#         # Command to use to stop the service.
-#         # Requires `daemon` to be set.
-#         #
-#         # Since: v1.6
-#         stop_command: foo
-
-#         # Controls how the daemon should be stopped.
-#         # Requires `daemon` to be set.
-#         #
-#         # Since: v1.6
-#         stop_mode: sigterm
-
-#         # Time to wait for daemon to stop.
-#         #
-#         # Since: v1.6
-#         stop_timeout: 42ms
-
-#         # Schedules when, or how often, to run a service or command.
-#         # Requires `daemon` to be set.
-#         # https://snapcraft.io/docs/services-and-daemons
-#         #
-#         # Since: v1.6
-#         timer: "00:00-24:00/24"
-
-#         # Declares the service watchdog timeout.
-#         # Requires `plugs` to contain `daemon-notify`.
-#         #
-#         # Since: v1.6
-#         watchdog_timeout: 42ms
-
-#     # Allows plugs to be configured. Plugs like system-files and personal-files
-#     # require this.
-#     plugs:
-#       personal-files:
-#         read:
-#           - $HOME/.foo
-#         write:
-#           - $HOME/.foo
-#           - $HOME/.foobar
+    # Allows plugs to be configured. Plugs like system-files and personal-files
+    # require this.
+    plugs:
+      config-files:
+        read:
+          - $HOME/.config/regit
+        write:
+          - $HOME/.config/regit
 
 brews:
   -
     # Name of the recipe
-    #
-    # Default: ProjectName
-    # Templates: allowed
     name: regit
 
-    # GOARM to specify which 32-bit arm version to use if there are multiple
-    # versions from the build section. Brew formulas support only one 32-bit
-    # version.
-    #
-    # Default: 6
     goarm: 6
-
-    # GOAMD64 to specify which amd64 version to use if there are multiple
-    # versions from the build section.
-    #
-    # Default: v1
     goamd64: v1
-
-    # NOTE: make sure the url_template, the token and given repo (github or
-    # gitlab) owner and name are from the same kind.
-    # We will probably unify this in the next major version like it is
-    # done with scoop.
-
-    # URL which is determined by the given Token (github, gitlab or gitea).
-    #
-    # Default depends on the client.
-    # Templates: allowed
     url_template: "https://github.com/woaitsAryan/regit/releases/download/{{ .Tag }}/{{ .ArtifactName }}"
-
-    # Allows you to add a custom require_relative at the top of the formula
-    # template.
-    # custom_require: custom_download_strategy
 
     # Git author used to commit to the repository.
     commit_author:
@@ -593,8 +526,6 @@ brews:
       email: yoprince.ab@gmail.com
 
     # The project name and current git tag are used in the format string.
-    #
-    # Templates: allowed
     commit_msg_template: "{{ .ProjectName }} {{ .Tag }}"
 
     # Directory inside the repository to put the formula.
@@ -607,42 +538,27 @@ brews:
     homepage: "https://github.com/woaitsAryan/regit"
 
     # Your app's description.
-    #
-    # Templates: allowed
     description: "CLI tool to manage git repositories and histories"
 
-    # SPDX identifier of your app's license.
     license: "MIT"
 
     test: |
       system "#{bin}/regit", "help"
 
     install: |
-      bin.install "regit"
+      system "go", "build", "-o", "#{bin}/regit", "."
 
-    # Setting this will prevent goreleaser to actually try to commit the updated
-    # formula - instead, the formula file will be stored on the dist directory
-    # only, leaving the responsibility of publishing it to the user.
-    # If set to auto, the release will not be uploaded to the homebrew tap
-    # in case there is an indicator for prerelease in the tag e.g. v1.0.0-rc1
-    #
-    # Templates: allowed
-    skip_upload: false
+    dependencies:
+      - name: go
+        type: build
+      - name: git-filter-repo
 
-    # Repository to push the generated files to.
+    skip_upload: true
+
     repository:
       # Repository owner.
-      #
-      # Templates: allowed
       owner: woaitsAryan
 
       # Repository name.
-      #
-      # Templates: allowed
       name: homebrew-core
-
-      # Optionally a branch can be provided.
-      #
-      # Default: default repository branch
-      # Templates: allowed
       branch: master
