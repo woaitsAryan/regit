@@ -1,6 +1,6 @@
 <br />
 <div align="center">
-    <img src="static/icon_transparent.png" alt="Logo" width="150" height="150">
+    <img src="assets/icon_transparent.png" alt="Logo" width="150" height="150">
 
   <h1 align="center">Regit</h3>
 
