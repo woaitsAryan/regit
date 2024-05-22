@@ -43,11 +43,11 @@ func init() {
 		Use:   "blame-linus",
 		Short: "Give all your commits to Linus :)",
 		Run: func(cmd *cobra.Command, args []string) {
-			scripts.Blamegit("torvalds", "torvalds@linux-foundation.org", models.BlameFlags)
+			scripts.Blamegit("torvalds", "torvalds@linux-foundation.org", models.BlameLinusFlags)
 		},
 	}
-	BlameLinusCommand.PersistentFlags().BoolVarP(&models.BlameFlags.Verbose, "verbose", "v", false, "verbose output")
-	BlameLinusCommand.PersistentFlags().BoolVarP(&models.BlameFlags.Quiet, "quiet", "q", false, "quiet output")
-	BlameLinusCommand.PersistentFlags().StringVarP(&models.BlameFlags.Source, "source", "s", ".", "path to the git repo")
-	BlameLinusCommand.PersistentFlags().StringVarP(&models.BlameFlags.Branch, "branch", "b", ".", "specify a branch")
+	BlameLinusCommand.PersistentFlags().BoolVarP(&models.BlameLinusFlags.Verbose, "verbose", "v", false, "verbose output")
+	BlameLinusCommand.PersistentFlags().BoolVarP(&models.BlameLinusFlags.Quiet, "quiet", "q", false, "quiet output")
+	BlameLinusCommand.PersistentFlags().StringVarP(&models.BlameLinusFlags.Source, "source", "s", ".", "path to the git repo")
+	BlameLinusCommand.PersistentFlags().StringVarP(&models.BlameLinusFlags.Branch, "branch", "b", ".", "specify a branch")
 }

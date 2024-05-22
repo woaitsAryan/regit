@@ -11,4 +11,7 @@ var NukeFlags Flags
 var RecommitFlags Flags
 var OwnFlags Flags
 var BlameFlags Flags
+var BlameLinusFlags Flags
 var RetimeFlags Flags
+var RewindFlags Flags
+var FastForwardFlags Flags

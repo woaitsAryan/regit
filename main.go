@@ -17,10 +17,8 @@ func init() {
 }
 
 func main() {
-	rootCmd.AddCommand(cmd.OwnGitCommand)
-	rootCmd.AddCommand(cmd.BlameGitCommand)
-	rootCmd.AddCommand(cmd.BlameLinusCommand)
-	rootCmd.AddCommand(cmd.RetimeCommand)
+	rootCmd.AddCommand(cmd.BlameGitCommand, cmd.BlameLinusCommand, cmd.OwnGitCommand)
+	rootCmd.AddCommand(cmd.RetimeCommand, cmd.FastForwardCommand, cmd.RewindCommand)
 	rootCmd.AddCommand(cmd.NukeGitCommand)
 	rootCmd.AddCommand(cmd.RecommitGitCommand)
 	cobra.CheckErr(rootCmd.Execute())
