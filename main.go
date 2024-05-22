@@ -9,6 +9,7 @@ import (
 var rootCmd = &cobra.Command{
 	Use:   "regit",
 	Short: "Regit is a CLI for managing git repositories",
+	Version: initializers.GetLatestTag(),
 }
 
 func init() {
