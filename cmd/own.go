@@ -22,6 +22,7 @@ func init() {
 	OwnGitCommand.PersistentFlags().BoolVarP(&models.OwnFlags.Verbose, "verbose", "v", false, "verbose output")
 	OwnGitCommand.PersistentFlags().BoolVarP(&models.OwnFlags.Quiet, "quiet", "q", false, "quiet output")
 	OwnGitCommand.PersistentFlags().StringVarP(&models.OwnFlags.Source, "source", "s", ".", "path to the git repo")
+	OwnGitCommand.PersistentFlags().StringVarP(&models.RecommitFlags.Branch, "branch", "b", ".", "specify a branch")
 
 	BlameGitCommand = &cobra.Command{
 		Use:   "blame [name] [email]",
@@ -36,6 +37,7 @@ func init() {
 	BlameGitCommand.PersistentFlags().BoolVarP(&models.BlameFlags.Verbose, "verbose", "v", false, "verbose output")
 	BlameGitCommand.PersistentFlags().BoolVarP(&models.BlameFlags.Verbose, "quiet", "q", false, "quiet output")
 	BlameGitCommand.PersistentFlags().StringVarP(&models.BlameFlags.Source, "source", "s", ".", "path to the git repo")
+	BlameGitCommand.PersistentFlags().StringVarP(&models.BlameFlags.Branch, "branch", "b", ".", "specify a branch")
 
 	BlameLinusCommand = &cobra.Command{
 		Use:   "blame-linus",
@@ -47,4 +49,5 @@ func init() {
 	BlameLinusCommand.PersistentFlags().BoolVarP(&models.BlameFlags.Verbose, "verbose", "v", false, "verbose output")
 	BlameLinusCommand.PersistentFlags().BoolVarP(&models.BlameFlags.Quiet, "quiet", "q", false, "quiet output")
 	BlameLinusCommand.PersistentFlags().StringVarP(&models.BlameFlags.Source, "source", "s", ".", "path to the git repo")
+	BlameLinusCommand.PersistentFlags().StringVarP(&models.BlameFlags.Branch, "branch", "b", ".", "specify a branch")
 }

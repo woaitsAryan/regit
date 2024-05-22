@@ -3,7 +3,8 @@ package models
 type Flags struct {
 	Verbose bool
 	Quiet   bool
-	Source    string
+	Source  string
+	Branch  string
 }
 
 var NukeFlags Flags

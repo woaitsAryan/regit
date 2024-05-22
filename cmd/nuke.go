@@ -23,4 +23,5 @@ func init() {
 	NukeGitCommand.PersistentFlags().BoolVarP(&models.NukeFlags.Verbose, "verbose", "v", false, "verbose output")
 	NukeGitCommand.PersistentFlags().BoolVarP(&models.NukeFlags.Verbose, "quiet", "q", false, "quiet output")
 	NukeGitCommand.PersistentFlags().StringVarP(&models.NukeFlags.Source, "source", "s", ".", "path to the git repo")
+	NukeGitCommand.PersistentFlags().StringVarP(&models.NukeFlags.Branch, "branch", "b", ".", "specify a branch")
 }

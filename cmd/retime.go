@@ -21,4 +21,5 @@ func init() {
 	RetimeCommand.PersistentFlags().BoolVarP(&models.RetimeFlags.Verbose, "verbose", "v", false, "verbose output")
 	RetimeCommand.PersistentFlags().BoolVarP(&models.RetimeFlags.Quiet, "quiet", "q", false, "quiet output")
 	RetimeCommand.PersistentFlags().StringVarP(&models.RetimeFlags.Source, "source", "s", ".", "path to the git repo")
+	RetimeCommand.PersistentFlags().StringVarP(&models.RetimeFlags.Branch, "branch", "b", ".", "specify a branch")
 }

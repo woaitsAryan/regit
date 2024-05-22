@@ -20,4 +20,5 @@ func init() {
 	RecommitGitCommand.PersistentFlags().BoolVarP(&models.RecommitFlags.Verbose, "verbose", "v", false, "verbose output")
 	RecommitGitCommand.PersistentFlags().BoolVarP(&models.RecommitFlags.Quiet, "quiet", "q", false, "quiet output")
 	RecommitGitCommand.PersistentFlags().StringVarP(&models.RecommitFlags.Source, "source", "s", ".", "path to the git repo")
+	RecommitGitCommand.PersistentFlags().StringVarP(&models.RecommitFlags.Branch, "branch", "b", ".", "specify a branch")
 }

@@ -9,6 +9,16 @@ import (
 )
 
 func ExecuteRewrite(command []string, flags models.Flags) {
+	if (flags.Branch != "."){
+		exists, err := branchExists(flags.Branch, flags.Source)
+		if err != nil {
+			log.Fatalf("branchExists() failed with %s\n", err)
+		}
+		if !exists {
+			log.Fatalf("Branch %s does not exist\n", flags.Branch)
+		}
+		command = append(command, "--refs", flags.Branch)
+	}
 	args := append([]string{"filter-repo", "--source", flags.Source, "--target", flags.Source}, command...)
 
 	cmd := exec.Command("git", args...)
