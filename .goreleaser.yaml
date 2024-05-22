@@ -200,54 +200,54 @@ winget:
       # Templates: allowed
       branch: master
       
-# .goreleaser.yaml
-snapcrafts:
-  - #
+# .goreleaser.
+# snapcrafts:
+  #- #
     # ID of the snapcraft config, must be unique.
     #
     # Default: 'default'
-    id: regit
+    # id: regit
 
     #
     # Default: '{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}{{ with .Arm }}v{{ . }}{{ end }}{{ with .Mips }}_{{ . }}{{ end }}{{ if not (eq .Amd64 "v1") }}{{ .Amd64 }}{{ end }}'
     # Templates: allowed
-    name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+    # name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
 
     # The name of the snap. This is optional.
     #
     # Default: ProjectName
-    name: regit
+    # name: regit
 
     # The canonical title of the application, displayed in the software
     # centre graphical frontends.
     #
     # Since: v1.19
-    title: Regit
+    # title: Regits
 
     # Path to icon image that represents the snap in the snapcraft.io store
     # pages and other graphical store fronts.
     #
     # Since: v1.19
-    icon: static/icon.png
+    # icon: static/icon.png
 
     # Whether to publish the snap to the snapcraft store.
     # Remember you need to `snapcraft login` first.
-    publish: true
+    # publish: true
 
     # Single-line elevator pitch for your amazing snap.
     # 79 char long at most.
-    summary: CLI tool to manage git repositories and histories
+    # summary: CLI tool to manage git repositories and histories
 
     # This the description of your snap. You have a paragraph or two to tell the
     # most important story about your snap. Keep it under 100 words though,
     # we live in tweetspace and your description wants to look good in the snap
     # store.
-    description: Regit is a CLI tool written in Go to efficiently rewrite git histories by changing ownership, timestamps, commit messages in just one command
+    # description: Regit is a CLI tool written in Go to efficiently rewrite git histories by changing ownership, timestamps, commit messages in just one command
 
     # Disable this configuration.
     #
     # Templates: allowed (since v1.20)
-    disable: false
+    # disable: false
 
     # Channels in store where snap will be pushed.
     #
@@ -258,22 +258,22 @@ snapcrafts:
     #   grade is 'stable': ["edge", "beta", "candidate", "stable"]
     #   grade is 'devel': ["edge", "beta"]
     # Templates: allowed (since v1.15)
-    channel_templates:
-      - edge
-      - beta
-      - candidate
-      - stable
-      - "{{ .Major }}.{{ .Minor }}/edge"
-      - "{{ .Major }}.{{ .Minor }}/beta"
-      - "{{ .Major }}.{{ .Minor }}/candidate"
-      - "{{ .Major }}.{{ .Minor }}/stable"
+    # channel_templates:
+    #   - edge
+    #   - beta
+    #   - candidate
+    #   - stable
+    #   - "{{ .Major }}.{{ .Minor }}/edge"
+    #   - "{{ .Major }}.{{ .Minor }}/beta"
+    #   - "{{ .Major }}.{{ .Minor }}/candidate"
+    #   - "{{ .Major }}.{{ .Minor }}/stable"
 
     # A guardrail to prevent you from releasing a snap to all your users before
     # it is ready.
     # `devel` will let you release only to the `edge` and `beta` channels in the
     # store. `stable` will let you release also to the `candidate` and `stable`
     # channels.
-    grade: stable
+    # grade: stable
 
     # Snaps can be setup to follow three different confinement policies:
     # `strict`, `devmode` and `classic`. A strict confinement where the snap
@@ -281,18 +281,18 @@ snapcrafts:
     # permissions for strict snaps can be declared as `plugs` for the app, which
     # are explained later. More info about confinement here:
     # https://snapcraft.io/docs/reference/confinement
-    confinement: devmode
+    # confinement: devmode
 
     # Your app's license, based on SPDX license expressions:
     # https://spdx.org/licenses
-    license: MIT
+    # license: MIT
 
     # A snap of type base to be used as the execution environment for this snap.
     # Valid values are:
     # * bare - Empty base snap;
     # * core - Ubuntu Core 16;
     # * core18 - Ubuntu Core 18.
-    base: core18
+    # base: core18
 
     # A list of features that must be supported by the core in order for
     # this snap to install.
@@ -352,22 +352,22 @@ snapcrafts:
     # Each binary built by GoReleaser is an app inside the snap. In this section
     # you can declare extra details for those binaries. It is optional.
     # See: https://snapcraft.io/docs/snapcraft-app-and-service-metadata
-    apps:
+    # apps:
       # The name of the app must be the same name as the binary built or the snapcraft name.
-      regit:
+      # regit:
         # If you any to pass args to your binary, you can add them with the
         # args option.
-        args: --quiet, --verbose, --path
+        # args: --quiet, --verbose, --path
 
         # The kind of wrapper to generate for the given command.
         #
         # Since: v1.6
-        adapter: none
+        # adapter: none
 
         # D-Bus name this service is reachable as. Mandatory if daemon=dbus.
         #
         # Since: v1.6
-        bus_name: drumbus
+        # bus_name: drumbus
 
         # A list of commands to be executed in order before the command of this
         # app.
@@ -386,7 +386,7 @@ snapcrafts:
         # You can override the command name.
         #
         # Default: AppName
-        command: regit
+        # command: regit
 
         # If you want your app to be autostarted and to always run in the
         # background, you can make it a simple daemon.
@@ -430,7 +430,7 @@ snapcrafts:
         # You can read the documentation about the available plugs and the
         # things they allow:
         # https://snapcraft.io/docs/supported-interfaces.
-        plugs: ["home", "network", "personal-files"]
+        # plugs: ["home", "network", "personal-files"]
 
         # Sets a command to run from inside the snap after a service stops.
         #
@@ -504,12 +504,12 @@ snapcrafts:
 
     # Allows plugs to be configured. Plugs like system-files and personal-files
     # require this.
-    plugs:
-      config-files:
-        read:
-          - $HOME/.config/regit
-        write:
-          - $HOME/.config/regit
+    # plugs:
+    #   config-files:
+    #     read:
+    #       - $HOME/.config/regit
+    #     write:
+    #       - $HOME/.config/regit
 
 brews:
   -
