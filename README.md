@@ -43,16 +43,25 @@ Using regit multiple times might cause object corruption in your git repository.
 <pre><code>make setup</code></pre>
 
 <h2 name="docs">Docs</h2>
-<p>Regit currently supports 5 commands:</p>
-<ol>
-  <li><code>regit recommit</code>: Reads all the commit diffs and writes better commit messages, then commits them again.</li>
-  <li><code>regit own</code>: Makes you the author of all the commits.</li>
-  <li><code>regit blame &lt;name&gt; &lt;email&gt;</code>: Makes the user specified by <code>&lt;name&gt;</code> and <code>&lt;email&gt;</code> the author of all the commits.</li>
-  <li><code>regit nuke /path/to/file</code>: Removes the file specified from all the commits in the repository.</li>
-  <li><code>regit retime &lt;duration&gt;</code>: Rewrites the commit times of all the commits in the repository to be of <code>x</code> hours in the past, evenly spaced. Can be any number of hours.</li>
-</ol>
-<p><strong>--path</strong> flag can be used to specify the path of the repository. If not specified, the current directory is used.</p>
 
+Regit currently supports 5 commands:
+
+1. `regit recommit`: Reads all the commit diffs and writes better commit messages, then commits them again.
+2. `regit own`: Makes you the author of all the commits.
+3. `regit blame <name> <email>`: Makes the user specified by `<name>` and `<email>` the author of all the commits.
+4. `regit nuke /path/to/file`: Removes the file specified from all the commits in the repository.
+5. `regit retime <duration>`: Rewrites the commit times of all the commits in the repository to be of `x` hours in the past, evenly spaced. Can be any number of hours.
+6. `regit rewind <duration>`: Rewinds the commit times of all the commits to be pulled `x` hours in the past. Can be any number of hours.
+7. `regit fastforward <duration>`: Fast forwards the commit times of all the commits to be pushed `x` hours in the future. Can be any number of hours.
+
+## Common Flags
+
+The following flags can be used with any command:
+
+- `--source` or `-s`: Specify the path to the git repo. If not specified, the current directory is used.
+- `--branch` or `-b`: Specify a branch.
+- `--verbose` or `-v`: Enable verbose output. This will print additional details about the operations being performed.
+- `--quiet` or `-q`: Enable quiet output. This will suppress most output, printing only essential information.
 
 ## Credits
 Regit uses [git-filter-repo](https://github.com/newren/git-filter-repo) under the hood to rewrite git histories. I would like to thank the authors and contributors of git-filter-repo for their work. 
