@@ -1,0 +1,20 @@
+name: regit # replace with your app's name
+type: app
+base: core20 # replace with your app's base
+version: '0.3.1' # replace with your app's version
+summary: CLI tool to manage git repositories and histories # replace with your app's short description
+description: |
+  Regit is a CLI tool written in Go to efficiently rewrite git histories by changing ownership, timestamps, commit messages in just one command
+
+grade: stable # 'stable' or 'devel'
+confinement: classic # 'strict', 'devmode' or 'classic'
+
+parts:
+  regit: # replace with your app's name
+    plugin: go
+    source: ./main.go # replace with your app's source directory
+
+apps:
+  regit: # replace with your app's name
+    command: regit # replace with your app's binary path
+    plugs: [home, network, removable-media]
