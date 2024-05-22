@@ -56,46 +56,37 @@ func getCommitData(flags models.Flags) []string {
 }
 
 func sendOpenAIMessage(commitDetails []string, flags models.Flags) []string {
-	fmt.Printf("Processing %d commits, this might take some time...\n", len(commitDetails))
+    fmt.Printf("Processing %d commits, this might take some time...\n", len(commitDetails))
 
-	var commitResponseDetails []string
+    commitResponseDetails := make([]string, len(commitDetails))
+    resultChans := make([]chan string, len(commitDetails))
 
-	type Result struct {
-		Index   int
-		Content string
-	}
+    for i := range resultChans {
+        resultChans[i] = make(chan string, 1)
+    }
 
-	var mutex = &sync.Mutex{}
-	var wg = &sync.WaitGroup{}
+    var wg sync.WaitGroup
 
-	jobs := make(chan Result, 5)
+    for i, commit := range commitDetails {
+        wg.Add(1)
 
-	go func() {
-		for result := range jobs {
-			mutex.Lock()
-			if result.Index >= len(commitResponseDetails) {
-				commitResponseDetails = append(commitResponseDetails, make([]string, result.Index-len(commitResponseDetails)+1)...)
-			}
-			commitResponseDetails[result.Index] = result.Content
-			mutex.Unlock()
-		}
-	}()
+        go func(i int, commit string) {
+            defer wg.Done()
 
-	for i, commit := range commitDetails {
-		wg.Add(1)
+            data := openAIRequest(commit, i, flags)
+            resultChans[i] <- data
+        }(i, commit)
+    }
 
-		go func(i int, commit string) {
-			defer wg.Done()
+    wg.Wait()
 
-			data := openAIRequest(commit, i, flags)
+    for i := range resultChans {
+        commitResponseDetails[i] = <-resultChans[i]
+        close(resultChans[i])
+    }
 
-			jobs <- Result{i, data}
-		}(i, commit)
-	}
-	wg.Wait()
-	close(jobs)
-	fmt.Println("All commits processed!")
-	return commitResponseDetails
+    fmt.Println("All commits processed!")
+    return commitResponseDetails
 }
 
 func openAIRequest(commit string, i int, flags models.Flags) string {
