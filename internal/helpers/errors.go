@@ -2,6 +2,7 @@ package helpers
 
 import (
 	"fmt"
+	"os"
 
 	"github.com/charmbracelet/lipgloss"
 )
@@ -16,5 +17,6 @@ func ThrowError(message string, e error, path string) {
 		styledMessage := errorStyle.Render(message)
 
 		fmt.Println(styledMessage)
+		os.Exit(1)
 	}
 }
