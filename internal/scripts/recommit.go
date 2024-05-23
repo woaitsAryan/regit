@@ -3,9 +3,9 @@ package scripts
 import (
 	"bytes"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io"
-	"log"
 	"net/http"
 	"os/exec"
 	"strings"
@@ -116,20 +116,20 @@ func openAIRequest(commit string, i int, flags models.Flags) string {
 	client := &http.Client{}
 	resp, _ := client.Do(req)
 
-	if resp == nil {
-		log.Fatalln("Response is nil, fatal error, probably internet connectivity issue.")
+	if resp == nil || resp.Body == nil {
+		helpers.ThrowError("Error fetching response, probably internet connectivity issue", errors.New("response is nil"), "internal/scripts/recommit.go")
 	}
 
 	bodyBytes, err := io.ReadAll(resp.Body)
 	if err != nil {
-		log.Fatalln(err)
+		helpers.ThrowError("Error reading the response body", err, "internal/scripts/recommit.go")
 	}
 
 	bodyString := string(bodyBytes)
 
 	err = json.Unmarshal([]byte(bodyString), &respBody)
 	if err != nil {
-		log.Fatalln(err)
+		helpers.ThrowError("Error parsing response to json, maybe try again. ", err, "internal/scripts/recommit.go")
 	}
 	content := respBody.Choices[0].Message.Content
 	if flags.Verbose {

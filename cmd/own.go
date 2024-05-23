@@ -1,9 +1,10 @@
 package cmd
 
 import (
+
 	"github.com/spf13/cobra"
-	"github.com/woaitsAryan/regit/internal/scripts"
 	"github.com/woaitsAryan/regit/internal/models"
+	"github.com/woaitsAryan/regit/internal/scripts"
 )
 
 var OwnGitCommand *cobra.Command

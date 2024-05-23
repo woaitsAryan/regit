@@ -22,6 +22,6 @@ func CheckCommand() {
         default:
             fmt.Println("Please run the following command to install git filter-repo: \n\n  python3 -m pip install --user git-filter-repo")
         }
-        os.Exit(1)
+        os.Exit(0)
     } 
 }

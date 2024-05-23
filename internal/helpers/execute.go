@@ -1,21 +1,23 @@
 package helpers
 
 import (
+	"errors"
 	"fmt"
-	"log"
 	"os/exec"
-	"github.com/woaitsAryan/regit/internal/models"
 
+	"github.com/woaitsAryan/regit/internal/models"
 )
 
 func ExecuteRewrite(command []string, flags models.Flags) {
 	if (flags.Branch != "."){
 		exists, err := branchExists(flags.Branch, flags.Source)
 		if err != nil {
-			log.Fatalf("branchExists() failed with %s\n", err)
+			ThrowError("Error validating branch name", err, "internal/helpers/execute.go")
 		}
 		if !exists {
-			log.Fatalf("Branch %s does not exist\n", flags.Branch)
+			tempMsg := fmt.Sprintf("Branch %s does not exist", flags.Branch)
+			tempError := errors.New("unable to find the specified branch")
+			ThrowError(tempMsg, tempError, "internal/helpers/execute.go")
 		}
 		command = append(command, "--refs", flags.Branch)
 	}
@@ -24,7 +26,7 @@ func ExecuteRewrite(command []string, flags models.Flags) {
 	cmd := exec.Command("git", args...)
 	output, err := cmd.CombinedOutput()
 	if err != nil {
-		log.Fatalf("cmd.Run() failed with %s\n", err)
+		ThrowError("Error executing git command", err, "internal/helpers/execute.go")
 	}
 	if flags.Quiet {
 		return

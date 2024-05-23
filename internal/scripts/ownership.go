@@ -17,7 +17,7 @@ func Owngit(flags models.Flags ) {
 	nameCmd := exec.Command("git", "config", "user.name")
     nameOut, err := nameCmd.Output()
     if err != nil {
-        fmt.Println("Error getting Git name:", err)
+		helpers.ThrowError("Error fetching Git username", err, "internal/scripts/ownership.go")
         return
     }
 	name := strings.TrimSpace(string(nameOut))
@@ -25,7 +25,7 @@ func Owngit(flags models.Flags ) {
     emailCmd := exec.Command("git", "config", "user.email")
     emailOut, err := emailCmd.Output()
     if err != nil {
-        fmt.Println("Error getting Git email:", err)
+		helpers.ThrowError("Error fetching Git email", err, "internal/scripts/ownership.go")
         return
     }
 	email := strings.TrimSpace(string(emailOut))

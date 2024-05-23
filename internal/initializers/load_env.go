@@ -2,12 +2,12 @@ package initializers
 
 import (
 	"fmt"
-	"log"
 	"os"
 	"path/filepath"
 	"reflect"
 
 	"github.com/spf13/viper"
+	"github.com/woaitsAryan/regit/internal/helpers"
 )
 
 type Config struct {
@@ -19,7 +19,7 @@ var CONFIG Config
 func LoadEnv() {
 	homeDir, err := os.UserHomeDir()
     if err != nil {
-        log.Fatal(err)
+		helpers.ThrowError("Error getting user's home directory", err, "internal/initializers/load_env.go")
     }
 
     configPath := filepath.Join(homeDir, ".config", "regit")
@@ -37,7 +37,7 @@ func LoadEnv() {
 
 	err = viper.Unmarshal(&CONFIG)
 	if err != nil {
-		log.Fatal(err)
+		helpers.ThrowError("Viped failed to parse the credentials", err, "internal/initializers/load_env.go")
 	}
 	requiredKeys := getRequiredKeys(CONFIG)
 	missingKeys := checkMissingKeys(requiredKeys, CONFIG)
@@ -86,23 +86,23 @@ func addOpenAIKey(configPath string) {
     fmt.Print("Enter your OpenAI key: ")
     _, err := fmt.Scanln(&openAIKey)
     if err != nil {
-        log.Fatal(err)
+		helpers.ThrowError("Error getting user input for OpenAI key", err, "internal/initializers/load_env.go")
     }
 
     err = os.MkdirAll(configPath, 0755)
     if err != nil {
-        log.Fatal(err)
+		helpers.ThrowError("Error making the config path to store the credentials", err, "internal/initializers/load_env.go")
     }
 
     filePath := filepath.Join(configPath, "config")
     file, err := os.OpenFile(filePath, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
     if err != nil {
-        log.Fatal(err)
+		helpers.ThrowError("Error making a file to store the credentials", err, "internal/initializers/load_env.go")
     }
     defer file.Close()
 
     if _, err := file.WriteString("OPENAI_API_KEY=" + openAIKey + "\n"); err != nil {
-        log.Fatal(err)
+		helpers.ThrowError("Error writing credentials to the file", err, "internal/initializers/load_env.go")
     }
 
     fmt.Println("OpenAI key saved successfully. Kindly run the command again")

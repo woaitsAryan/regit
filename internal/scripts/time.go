@@ -2,7 +2,6 @@ package scripts
 
 import (
 	"fmt"
-	"log"
 	"strconv"
 	"strings"
 	"time"
@@ -17,7 +16,7 @@ func Rewind(duration string, flags models.Flags) {
 
 	durationOffset, err := time.ParseDuration(duration)
 	if err != nil {
-		log.Fatal(err)
+		helpers.ThrowError("Error parsing the duration given, kindly use a format like 2h", err, "internal/scripts/time.go" )
 	}
 
 	unixOffset := int64(durationOffset.Seconds())
@@ -25,7 +24,6 @@ func Rewind(duration string, flags models.Flags) {
 	if flags.Verbose {
 		fmt.Printf("Rewinding by %d\n", durationOffset)
 	}
-	fmt.Println(unixOffset)
 
 	rewindCmd := []string{
 		"--commit-callback",
@@ -50,13 +48,13 @@ func Retimegit(duration string, flags models.Flags) {
 	commitNum := helpers.GetTotalCommits(flags)
 	durationOffset, err := time.ParseDuration("-" + duration)
 	if err != nil {
-		log.Fatal(err)
+		helpers.ThrowError("Error parsing the duration given, kindly use a format like 2h", err, "internal/scripts/time.go" )
 	}
 	nowTime := time.Now().Add(durationOffset).Unix()
 
 	durationInt, err := strconv.Atoi(strings.TrimSuffix(duration, "h"))
 	if err != nil {
-		log.Fatal(err)
+		helpers.ThrowError("Error parsing the duration given to int, kindly use a format like 2h", err, "internal/scripts/time.go" )
 	}
 
 	if(flags.Verbose){
@@ -89,7 +87,7 @@ func FastForward(duration string, flags models.Flags) {
 
 	durationOffset, err := time.ParseDuration(duration)
 	if err != nil {
-		log.Fatal(err)
+		helpers.ThrowError("Error parsing the duration given, kindly use a format like 2h", err, "internal/scripts/time.go" )
 	}
 
 	unixOffset := int64(durationOffset.Seconds())
@@ -97,7 +95,6 @@ func FastForward(duration string, flags models.Flags) {
 	if flags.Verbose {
 		fmt.Printf("Fast forwarding by %d\n", durationOffset)
 	}
-	fmt.Println(unixOffset)
 
 	fastForwardCmd := []string{
 		"--commit-callback",
